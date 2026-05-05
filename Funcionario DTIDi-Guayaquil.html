@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTIDi × EpiSIG — Directorio Estratégico Guayaquil</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes fadeSlide { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  .anim { animation: fadeSlide .28s ease-out; }
+  .card { transition: transform .25s ease, box-shadow .25s ease; }
+  .card:hover { transform:translateY(-5px); box-shadow:0 20px 40px rgba(0,0,0,.12); }
+  .tab-btn { transition: color .15s, border-color .15s; }
+  .social-btn { transition: background .2s, transform .2s; }
+  .social-btn:hover { transform: scale(1.1); }
+  #modal-overlay { transition: opacity .2s ease; }
+  .photo-wrap img { object-fit:cover; width:100%; height:100%; }
+  .chip { display:inline-flex; align-items:center; font-size:.6rem; padding:.2rem .55rem; border-radius:.3rem; font-weight:600; letter-spacing:.03em; }
+  .src-link { display:flex; align-items:flex-start; gap:.5rem; padding:.45rem .65rem; border-radius:.5rem; transition: background .15s; word-break:break-word; }
+  .src-link:hover { background:#eef2ff; }
+</style>
+</head>
+<body class="bg-slate-50 min-h-screen" style="font-family:'Inter',system-ui,sans-serif">
+
+<!-- MODAL OVERLAY -->
+<div id="modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none">
+  <div id="modal-bg" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
+  <div id="modal-box" class="relative bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[92vh] flex flex-col md:flex-row overflow-hidden anim">
+    <div id="modal-left" class="w-full md:w-72 shrink-0 p-8 text-white flex flex-col relative"></div>
+    <div class="flex-1 flex flex-col overflow-hidden bg-white">
+      <div id="modal-tabs" class="flex px-8 pt-7 border-b border-slate-100 gap-6 shrink-0 flex-wrap"></div>
+      <div id="modal-content" class="p-8 overflow-y-auto flex-1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 pb-20">
+  <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100 mb-12">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold mb-4 tracking-wide uppercase">
+        ⚡ Directorio Estratégico
+      </div>
+      <h1 class="text-4xl font-black text-slate-900 tracking-tight">DTIDi <span class="text-slate-300">×</span> EpiSIG</h1>
+      <p class="text-slate-500 mt-2 max-w-xl">Perfiles del Centro de Investigación Multidisciplinario — Guayaquil. Cada ficha incluye <strong>fuentes verificables</strong> para validar la información. Investigación: mayo 2026.</p>
+    </div>
+    <div class="flex gap-3 shrink-0">
+      <div class="text-center px-6 py-4 bg-slate-50 rounded-2xl border border-slate-100">
+        <div class="text-3xl font-black text-slate-800">11</div>
+        <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Funcionarios</div>
+      </div>
+      <div class="text-center px-6 py-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+        <div class="text-3xl font-black text-emerald-600">6</div>
+        <div class="text-xs text-emerald-600 font-semibold uppercase tracking-wider">Fotos verif.</div>
+      </div>
+      <div class="text-center px-6 py-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+        <div class="text-3xl font-black text-indigo-600">5</div>
+        <div class="text-xs text-indigo-500 font-semibold uppercase tracking-wider">Clusters</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="clusters-root"></div>
+</div>
+
+<script>
+const esc = s => s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : '';
+
+const CLUSTERS = [
+{
+  id:'liderazgo', title:'Liderazgo Estratégico', icon:'🔭',
+  gradient:'from-purple-500 to-indigo-600', bg:'bg-purple-50', border:'border-purple-200', text:'text-purple-700',
+  desc:'Dirección institucional, avales y política de investigación.',
+  members:[{
+    name:'Dra. Sunny Sánchez Giler', fullName:'Sunny Eunice Sánchez Giler, PhD',
+    profession:'Médico, PhD', role:'Directora Técnica DTIDi',
+    initials:'SS', avatarFrom:'#7c3aed', avatarTo:'#4338ca',
+    email:'ssanchez@inspi.gob.ec',
+    photo:'https://www.investigacionsalud.gob.ec/wp-content/uploads/2026/02/WhatsApp-Image-2026-01-19-at-11.20.47-AM.jpeg',
+    linkedin:null, scholar:null, orcid:null,
+    researchgate:'https://www.researchgate.net/scientific-contributions/Sunny-Sanchez-Giler-2202398803',
+    twitter:null,
+    trajectory:`Médico formada en la UEES (Guayaquil), PhD con vínculo formativo al Instituto Pedro Kourí (Cuba). Docente-investigadora en UEES hasta ~2017. Desde 2017 figura como Directora de I+D+i del INSPI; actualmente Directora Técnica DTIDi — jefa institucional del centro EpiSIG. Integrante del Equipo Editorial de la Revista INSPILIP. ResearchGate: 9 contribuciones, 43 citas.`,
+    projects:[
+      'Dirige los tres centros de investigación del INSPI: CIM "Ernesto Gutiérrez Vera", CIREV y plataforma EpiSIG.',
+      'Coordinación de 8 plataformas científicas del INSPI.',
+      'Colaboración con el Instituto Pedro Kourí (Cuba) en virología/micología.'
+    ],
+    publications:[
+      'Molecular epidemiology and phylogenetic analysis of HPV in women with cervical lesions — Rev. Argentina de Microbiología 2018 (PMID 29157596).',
+      'Caracterización molecular de Cryptococcus neoformans en pacientes con HIV, Guayaquil — Biomédica 2017.',
+      'Neurocriptococosis en VIH en Guayaquil — Rev. Cubana Med. Tropical 2016.',
+      'Infecciones múltiples por Alphapapillomavirus especie 9 en mujeres ecuatorianas — Rev. Cubana Med. Tropical 2022.',
+      'Zoster sine herpete tras infección leve por SARS-CoV-2 — Rev. Cubana Med. Tropical 2023.',
+      'Sepsis por Cryptococcus neoformans en paciente VIH+ (caso) — INSPILIP Vol. 2 Nº2 2018.'
+    ],
+    collab:`Como Directora DTIDi es la autoridad para avalar proyectos conjuntos INSPI-EpiSIG. Conversación ideal: proyectos concretos — atlas de criptococosis/HIV en la costa, mapa molecular HPV por parroquia, integración geoespacial con CIREV en arbovirosis.`,
+    skills:['Micología Clínica','Virología Oncológica','Gestión I+D+i','HPV / VIH'],
+    sources:[
+      {label:'Editorial INSPI 2026 (foto)', url:'https://www.investigacionsalud.gob.ec/editorial-inspi-2026/'},
+      {label:'DTIDi INSPI – sitio oficial', url:'https://www.investigacionsalud.gob.ec/direccion-tecnica-de-investigacion-desarrollo-e-innovacion/'},
+      {label:'ResearchGate – Sunny Sánchez Giler', url:'https://www.researchgate.net/scientific-contributions/Sunny-Sanchez-Giler-2202398803'},
+      {label:'PubMed 29157596 – HPV Ecuador', url:'https://pubmed.ncbi.nlm.nih.gov/29157596/'},
+      {label:'Biomédica – Cryptococcus Guayaquil', url:'https://revistabiomedica.org/index.php/biomedica/article/view/3322'},
+      {label:'Rev. Cubana Med. Tropical – Neurocriptococosis', url:'https://revmedtropical.sld.cu/index.php/medtropical/article/view/123/107'},
+      {label:'INSPILIP – Sepsis Cryptococcus', url:'https://www.inspilip.gob.ec/index.php/inspi/article/view/102'},
+      {label:'Equipo editorial INSPILIP', url:'https://www.inspilip.gob.ec/OJS/index.php/inspi/about/editorialTeam'},
+      {label:'Conferencia magistral INSPI 2019', url:'https://www.investigacionsalud.gob.ec/wp-content/uploads/certificados/CONFERENCIA%20MAGISTRAL%20%E2%80%9CDESAFIOS%20ACTUALES%20EN%20EL%20MANEJO%20CLINICO%E2%80%9D/SUNNY%20SANCHEZ_signed.pdf'}
+    ]
+  }]
+},
+{
+  id:'infecciones', title:'Infecciones Emergentes & Vectores', icon:'🦠',
+  gradient:'from-emerald-400 to-teal-600', bg:'bg-emerald-50', border:'border-emerald-200', text:'text-emerald-700',
+  desc:'Zoonosis, arbovirosis, virología respiratoria y serpentario.',
+  members:[
+  {
+    name:'Dr. Solón Alberto Orlando', fullName:'Solón Alberto Orlando Narváez',
+    profession:'Méd. Veterinario, Mgs.', role:'Investigador Auxiliar 1',
+    initials:'SO', avatarFrom:'#059669', avatarTo:'#0d9488',
+    email:'aorlando@inspi.gob.ec',
+    photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/orlando-1017x1024.png',
+    linkedin:null, scholar:null, orcid:null,
+    researchgate:'https://www.researchgate.net/profile/Alberto-Orlando',
+    twitter:null,
+    trajectory:`Médico Veterinario y Zootecnista. Master en Epidemiología del Instituto Pedro Kourí (Cuba). Diplomado en Epidemiología Aplicada (UNAM). En INSPI desde 2004. Fue Director Ejecutivo (e) del INSPI durante COVID-19 y ex-Director de I+D+i. Investigador Acreditado Nivel 1 SENESCYT. Docente de epidemiología en UCSG, UTB y Universidad Agraria del Ecuador. One Health Research Group (UDLA).`,
+    projects:[
+      'Manual de Vigilancia y Control de la Enfermedad de Chagas en el Ecuador 2020 (MSP/INSPI).',
+      'Manual para la Vigilancia de la Resistencia a Insecticidas en Ecuador 2019.',
+      'Coordinador piloto TIE (Técnica del Insecto Estéril) — Galápagos contra Aedes aegypti (OIEA/INSPI/EPN).',
+      'Vigilancia SARS-CoV-2 en reservorios animales de Guayaquil.'
+    ],
+    publications:[
+      'Leptospirosis in Ecuador: Current Status and Future Prospects — Trop. Med. Infect. Dis. 2023 (DOI 10.3390/tropicalmed8040202).',
+      'Leptospirosis: Morbidity, mortality, and spatial distribution of hospitalized cases Ecuador 2000-2020.',
+      'SARS-CoV-2 infection in synanthropic rats from Guayaquil — Acta Tropica 2024.',
+      'Control de vectores de arbovirus en tiempos de COVID-19 — Lineamiento INSPI/MSP.',
+      'Coautor: libro Angiostrongylus cantonensis: Emergencia en América.'
+    ],
+    collab:`Aliado #1 para el Proyecto TIE. EpiSIG aporta modelamiento espacial de hot-spots Aedes y mapas de denominadores poblacionales; él aporta conocimiento del vector y aval institucional. Propuesta directa: índice de riesgo geoespacial para liberaciones TIE en Ecuador continental.`,
+    skills:['Zoonosis One Health','Entomología Vectorial','Epidemiología','Chagas / Aedes'],
+    sources:[
+      {label:'CV oficial INSPI – Alberto Orlando 2020', url:'https://www.investigacionsalud.gob.ec/wp-content/uploads/2020/08/cv-alberto-2020-agosto.pdf'},
+      {label:'CIM Investigadores INSPI (foto)', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
+      {label:'Nuevo Director Ejecutivo INSPI (anuncio MSP)', url:'https://www.investigacionsalud.gob.ec/nuevo-director-ejecutivo-del-instituto-nacional-de-investigacion-en-salud-publica-inspi-dr-leopoldo-izquieta-perez/'},
+      {label:'ResearchGate – Alberto Orlando', url:'https://www.researchgate.net/profile/Alberto-Orlando'},
+      {label:'PMC – Leptospirosis in Ecuador 2023', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC10141158/'},
+      {label:'PMC – Leptospirosis hospitalized cases Ecuador 2000-2020', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC9129009/'},
+      {label:'Manual Chagas Ecuador 2020 (MSP)', url:'https://www.salud.gob.ec/wp-content/uploads/2026/02/Chagas-2020-manual-vigilancia-control.pdf'},
+      {label:'Manual Resistencia Insecticidas 2019 (RG)', url:'https://www.researchgate.net/publication/370582402'},
+      {label:'TIE Ecuador – sitio INSPI', url:'https://www.investigacionsalud.gob.ec/desarrollo-de-la-tecnica-del-insecto-esteril-en-ecuador/'},
+      {label:'SARS-CoV-2 ratas Guayaquil (RG)', url:'https://www.researchgate.net/publication/383605115'}
+    ]
+  },
+  {
+    name:'Mgs. Doménica De Mora', fullName:'Doménica Joseth De Mora Coloma, Mgs.',
+    profession:'Bióloga, Mgs.', role:'Investigador Agregado 2',
+    initials:'DM', avatarFrom:'#10b981', avatarTo:'#0d9488',
+    email:'ddemora@inspi.gob.ec',
+    photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/domenica1-01-1017x1024.png',
+    linkedin:'https://www.linkedin.com/in/dom%C3%A9nica-de-mora-coloma-6a7701122/',
+    scholar:null, orcid:null,
+    researchgate:'https://www.researchgate.net/profile/Domenica-Mora',
+    twitter:null,
+    trajectory:`Bióloga y Magíster en Microbiología Avanzada (Universidad de Guayaquil). Trayectoria previa en SNEM (control vectorial). Supervisora del Centro Nacional de Influenza y otros Virus Respiratorios del INSPI — nodo ecuatoriano de la Red OPS/CDC. Chairman del Advisory Committee on Biosafety. ResearchGate: 39 publicaciones, 727 citas.`,
+    projects:[
+      'Vigilancia genómica rutinaria de SARS-CoV-2, influenza y RSV — nodo GISAID Ecuador.',
+      'Primer reporte de linaje B.1.1.7 (Alpha) de SARS-CoV-2 en Ecuador.',
+      'Vigilancia brote H5N1 Ecuador 2022-2024.',
+      'Co-estudio multicéntrico estacionalidad RSV en 12 países (CDC, OPS, Charité-Berlín).'
+    ],
+    publications:[
+      'Virological evidence of NPIs against COVID-19 in Ecuador — Emerging Microbes & Infections 2023.',
+      'Seasonality of RSV in 12 countries — Influenza and Other Respiratory Viruses 2021.',
+      'Global Epidemiology of RSV in 15 countries — Open Forum Infect Dis 2021.',
+      'Brote H5N1 Ecuador 2022-2024 — Curr Infect Dis Rep 2024.',
+      'First report SARS-CoV-2 B.1.1.7 (Alpha) Ecuador — Dovepress IDR 2021.',
+      'Evolución genética influenza América Latina 2017-18.'
+    ],
+    collab:`Sus bases de datos de vigilancia centinela (RSV/influenza/SARS-CoV-2 con metadatos cantonales y temporales) son la materia prima ideal para econometría espacial de EpiSIG. Propuesta: modelo predictivo de inicio/duración de temporada RSV por cantón + tablero de vigilancia genómica georreferenciado para H5N1.`,
+    skills:['Virología Respiratoria','Vigilancia Genómica','RSV / Influenza / H5N1','GISAID'],
+    sources:[
+      {label:'CIM Investigadores INSPI (foto, "Bgla. Domenica Joseth De Mora Coloma Msg.")', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
+      {label:'LinkedIn – Doménica De Mora Coloma', url:'https://www.linkedin.com/in/dom%C3%A9nica-de-mora-coloma-6a7701122/'},
+      {label:'ResearchGate – Domenica Mora', url:'https://www.researchgate.net/profile/Domenica-Mora'},
+      {label:'PMC – Impacto NPIs COVID-19 Ecuador 2023', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC10563623/'},
+      {label:'PMC – Estacionalidad RSV 12 países', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8542954/'},
+      {label:'PMC – Epidemiología global RSV 15 países', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8320297/'},
+      {label:'Springer – Brote H5N1 Ecuador 2024', url:'https://link.springer.com/article/10.1007/s11908-024-00849-5'},
+      {label:'Dovepress – Primer reporte Alpha B.1.1.7 Ecuador', url:'https://www.dovepress.com/first-report-of-sars-cov-2-lineage-b117-alpha-variant-in-ecuador-janua-peer-reviewed-fulltext-article-IDR'},
+      {label:'PMC – Evolución influenza América Latina 2017-18', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7064222/'}
+    ]
+  },
+  {
+    name:'Mgs. María del Carmen Terán', fullName:'María del Carmen Terán Zavala, Mgs.',
+    profession:'Bióloga, Mgs.', role:'Responsable Técnico Serpentario',
+    initials:'MT', avatarFrom:'#0d9488', avatarTo:'#0891b2',
+    email:'mteranz@inspi.gob.ec',
+    photo:null, photoNote:'Sin foto pública con etiqueta nominal verificable. Aparece en notas grupales del Serpentario sin caption con su nombre.',
+    linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
+    trajectory:`Bióloga (título "Dra. Biol." en uso institucional) y Magíster. Responsable del Serpentario INSPI (sede Hospital Guasmo Sur, Guayaquil) desde al menos 2016. Experta en herpetología, venómica de vipéridos ecuatorianos y hemoparásitos. Red activa con Instituto Clodomiro Picado (Costa Rica) — Bruno Lomonte y Mahmood Sasa —, CSIC España (Juan J. Calvete) y FIOCRUZ Brasil. Capacitadora del MSP en manejo clínico ofídico.`,
+    projects:[
+      'Cría ex-situ y mantenimiento del banco de serpientes para producción de sueros antiofídicos (300 ampollas/año).',
+      'Recepción de fauna decomisada (29 Bothrops atrox de Bomberos Machala, 2024).',
+      'Sanidad de serpientes en cautiverio — prevalencia de hemoparásitos.'
+    ],
+    publications:[
+      'Venomics of hognosed pitvipers Porthidium arcosae and P. volcanicum — J. Proteomics 2021 (PMID 34534714).',
+      'Stability of historical and desiccated snake venoms (Ecuador) — Comp. Biochem. Physiol. C 2020 (PMID 31911190).',
+      'Actividad letal de seis venenos de serpientes de importancia médica en Ecuador — Rev. Ecuat. Med. 2016.',
+      'Prevalence of Haemoparasites in snakes from EX-SITU conservation environment — Rev. Cient. CNA UG 2025.'
+    ],
+    collab:`Sinergia geomática directa: mapas de calor de accidentes ofídicos (EpiSIG) → distribución logística de sueros del Serpentario hacia distritos de mayor riesgo. Proyecto: "Mapa de riesgo ofídico + asignación óptima de antivenenos por unidad operativa".`,
+    skills:['Venómica','Herpetología','Hemoparásitos','Sueros Antiofídicos'],
+    sources:[
+      {label:'PubMed 34534714 – Venomics Porthidium', url:'https://pubmed.ncbi.nlm.nih.gov/34534714/'},
+      {label:'PubMed 31911190 – Stability snake venoms', url:'https://pubmed.ncbi.nlm.nih.gov/31911190/'},
+      {label:'ResearchGate – Actividad letal seis venenos Ecuador', url:'https://www.researchgate.net/publication/310461088_Actividad_letal_de_seis_venenos_de_serpientes_de_importancia_medica_en_el_Ecuador'},
+      {label:'Rev. Cient. CNA UG – Hemoparásitos serpientes', url:'https://revistas.ug.edu.ec/index.php/cna/en/article/view/2064'},
+      {label:'Taller envenenamiento ofídico INSPI/MSP 2023', url:'https://www.investigacionsalud.gob.ec/inspi-dicto-taller-de-manejo-clinico-del-envenenamiento-por-mordedura-de-serpiente-al-personal-de-los-distritos-1-4-8-y-24-del-ministerio-de-salud-publica/'},
+      {label:'Bomberos Machala – Entrega 29 serpientes a INSPI', url:'https://bomberosmachala.gob.ec/entregamos-29-serpientes-al-inspi-guayaquil/'},
+      {label:'MSP – 300 ampollas suero antiofídico INSPI', url:'https://www.salud.gob.ec/300-ampollas-de-suero-contra-mordeduras-de-serpientes-se-elaboran-en-el-inspi/'}
+    ]
+  }]
+},
+{
+  id:'biologia', title:'One Health & Biología Molecular', icon:'🧬',
+  gradient:'from-blue-500 to-indigo-500', bg:'bg-blue-50', border:'border-blue-200', text:'text-blue-700',
+  desc:'Microbiota, zoonosis urbanas y biotecnología aplicada.',
+  members:[
+  {
+    name:'Ing. David Guizado Herrera', fullName:'David Andrés Guizado Herrera',
+    profession:'Ingeniero Químico', role:'Analista IDI 2',
+    initials:'DG', avatarFrom:'#2563eb', avatarTo:'#4338ca',
+    email:'dguizado@inspi.gob.ec',
+    photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/23-012-1016x1024.png',
+    linkedin:'https://www.linkedin.com/in/david-andr%C3%A9s-guizado-herrera-393645181/',
+    scholar:null,
+    orcid:'0000-0002-5948-9889',
+    researchgate:null, twitter:null,
+    trajectory:`Ingeniero Químico (Universidad de Guayaquil) + Maestría VIU–Universidad Internacional de Valencia (España). Trayectoria: pasante/tesista Fundación Bioelit + U. Guayaquil → vigilancia ambiental INSPI (SARS-CoV-2 en aguas residuales costeras, 2022) → Analista IDI 2 con extensión hacia One Health. Revisor par para PLOS ONE (2025).`,
+    projects:[
+      'Vigilancia SARS-CoV-2 en aguas residuales y recreativas de la costa ecuatoriana (PLOS ONE 2024).',
+      'Primer reporte de Bartonella henselae y B. clarridgeiae en gatos callejeros de Ecuador.',
+      'Estudio piloto de leptospirosis con enfoque One Health 2023.',
+      'Investigación Eje Microbiota-Intestino-Cerebro en CIM.'
+    ],
+    publications:[
+      'Detection of thermotolerant coliforms and SARS-CoV-2 RNA in sewage and recreational waters, Ecuadorian coast — PLOS ONE 2024.',
+      'Leptospirosis outbreak in Ecuador 2023: pilot study One Health — One Health 2024.',
+      'First report of Bartonella henselae and B. clarridgeiae in stray cats from Ecuador — Acta Tropica 2024.',
+      'First detection of SARS-CoV-2 variant Omicron in Ecuador — New Microbes & New Infections 2022.',
+      'Eje Microbiota-Intestino-Cerebro y su relación con la depresión — Revista INSPILIP 2025.'
+    ],
+    collab:`EpiSIG aporta pipelines reproducibles en R/Python (DADA2, QIIME2, phyloseq) para análisis 16S/metagenómica y correlaciones espacio-temporales One Health. Colaboración natural: piloto que vincule muestreo de microbiota/leptospiras con variables ambientales y epidemiológicas zonales.`,
+    skills:['Bioquímica','Microbiota','One Health','Bioinformática'],
+    sources:[
+      {label:'CIM Investigadores INSPI (foto, "Ing. David Andrés Guizado Herrera")', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
+      {label:'LinkedIn – David Guizado Herrera', url:'https://www.linkedin.com/in/david-andr%C3%A9s-guizado-herrera-393645181/'},
+      {label:'ORCID 0000-0002-5948-9889', url:'https://orcid.org/0000-0002-5948-9889'},
+      {label:'INSPILIP – Microbiota-Cerebro y depresión', url:'https://www.inspilip.gob.ec/index.php/inspi/article/view/840'},
+      {label:'PLOS ONE – SARS-CoV-2 sewage Ecuador (autores)', url:'https://journals.plos.org/plosone/article/authors?id=10.1371/journal.pone.0302000'},
+      {label:'PMC – Leptospirosis One Health 2023', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC11664413/'},
+      {label:'INSPI – Lab. Vigilancia Epidemiológica', url:'https://www.investigacionsalud.gob.ec/direccion-de-laboratorio-de-vigilancia-epidemiologica-y-referencia-nacional-2/'},
+      {label:'Fundación Bioelit – Nosotros', url:'https://fundacionbioelit.org/nosotros/'}
+    ]
+  },
+  {
+    name:'Ing. Naomi Mora Jaramillo', fullName:'Naomi Daniela Mora Jaramillo',
+    profession:'Ing. en Biotecnología, Summa Cum Laude', role:'Analista IDI 2',
+    initials:'NM', avatarFrom:'#3b82f6', avatarTo:'#0ea5e9',
+    email:'nmora@inspi.gob.ec',
+    photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/noemi-mora-01-1017x1024.png',
+    photoNote:'⚠ Foto del directorio CIM-INSPI etiquetada como "Naomí Daniela Mora Zambrano" (apellido materno distinto al "Jaramillo" oficial). Mismo cargo, misma sede; probable error de apellido en la página o uso alternativo. Verificar en persona.',
+    linkedin:'https://www.linkedin.com/in/naomi-mora-jaramillo-8081a7195/',
+    scholar:null, orcid:null, researchgate:null, twitter:null,
+    trajectory:`Ingeniera en Biotecnología graduada Summa Cum Laude. Analista IDI 2 en el laboratorio multidisciplinario del CIM-INSPI-Guayaquil, en colaboración con UDLA (García-Bereguiain). Línea dominante: One Health y zoonosis urbanas en Guayaquil (no neurobiología). Coautora desde 2024 en estudios de SARS-CoV-2 en fauna sinantrópica, leptospirosis y fitopatología.`,
+    projects:[
+      'Vigilancia SARS-CoV-2 en ratas sinantrópicas de Guayaquil (One Health).',
+      'Leptospira en fauna sinantrópica urbana de Guayaquil.',
+      'Detección de cianobacterias en piscinas camaroneras del Pacífico ecuatoriano.',
+      'Fitopatología: Pectobacterium peruviense en papa Superchola, Cañar.'
+    ],
+    publications:[
+      'SARS-CoV-2 infection in synanthropic rats from Guayaquil — Acta Tropica 2024.',
+      'Leptospira en fauna sinantrópica de Guayaquil — Acta Tropica 2025.',
+      'Cyanobacteria en piscinas camaroneras del Pacífico ecuatoriano — Current Microbiology 2024.',
+      'Pectobacterium peruviense / papa Superchola (Cañar) — Plant Disease 2024.',
+      'Eje Microbiota-Intestino-Cerebro y su relación con la depresión — Revista INSPILIP.'
+    ],
+    collab:`EpiSIG aporta bioestadística avanzada (modelos mixtos, IDW/KDE espacial, meta-análisis). Sus datasets de leptospirosis y SARS-CoV-2 en ratas son ideales para análisis geoespacial parroquial y estimación bayesiana de prevalencia ajustada.`,
+    skills:['Biotecnología','One Health','Zoonosis Urbanas','Biología Molecular'],
+    sources:[
+      {label:'CIM Investigadores INSPI (foto – ver nota de discrepancia)', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
+      {label:'LinkedIn – Naomi Mora Jaramillo', url:'https://www.linkedin.com/in/naomi-mora-jaramillo-8081a7195/'},
+      {label:'ScienceDirect – SARS-CoV-2 ratas Guayaquil', url:'https://www.sciencedirect.com/science/article/abs/pii/S0001706X24002535'},
+      {label:'ScienceDirect – Leptospira fauna Guayaquil', url:'https://www.sciencedirect.com/science/article/abs/pii/S0001706X25001536'},
+      {label:'Springer – Cyanobacteria piscinas camaroneras', url:'https://link.springer.com/article/10.1007/s00284-024-03765-y'},
+      {label:'APS – Pectobacterium peruviense Superchola', url:'https://apsjournals.apsnet.org/doi/abs/10.1094/PDIS-08-24-1759-PDN'},
+      {label:'INSPILIP – Microbiota-Cerebro y depresión', url:'https://www.inspilip.gob.ec/index.php/inspi/article/view/840'}
+    ]
+  },
+  {
+    name:'Ing. Fiorella Rodriguez', fullName:'Fiorella Fernanda Rodriguez Espinosa',
+    profession:'Ing. en Biotecnología', role:'Profesional en Biotecnología',
+    initials:'FR', avatarFrom:'#0ea5e9', avatarTo:'#2563eb',
+    email:'frodriguez@inspi.gob.ec',
+    photo:null, photoNote:'Sin foto pública verificable.',
+    linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
+    trajectory:`Ingeniera en Biotecnología. Huella digital pública mínima — sin perfil en LinkedIn/ORCID/RG/Scholar localizado, ni tesis pública en repositorio USFQ. Compatible con graduación reciente (2022-2025) y entrada al sector público antes de publicar. Su trabajo concreto en INSPI no está documentado en fuentes abiertas — recomendable solicitar CV/ORCID en la reunión.`,
+    projects:[
+      'Estandarización y diseño experimental de protocolos biotecnológicos en laboratorio DTIDi.',
+      'Soporte metodológico en proyectos de biología molecular del CIM.'
+    ],
+    publications:[],
+    collab:`EpiSIG puede colaborar en diseño experimental (DoE), análisis de varianza bioestadística y procesamiento estadístico de datos PCR/qPCR para validación de protocolos de laboratorio.`,
+    skills:['Biotecnología','Biología Molecular','Diseño Experimental'],
+    sources:[
+      {label:'INSPI – sitio oficial (única referencia institucional confirmable)', url:'https://www.investigacionsalud.gob.ec/'},
+      {label:'DTIDi INSPI', url:'https://www.investigacionsalud.gob.ec/direccion-tecnica-de-investigacion-desarrollo-e-innovacion/'}
+    ]
+  }]
+},
+{
+  id:'salud', title:'Salud Mental & Clínica', icon:'🧠',
+  gradient:'from-orange-400 to-rose-500', bg:'bg-orange-50', border:'border-orange-200', text:'text-orange-700',
+  desc:'Determinantes psicosociales y neurología clínica.',
+  members:[
+  {
+    name:'Mgs. Yasel Santiesteban', fullName:'Yasel Manuel Santiesteban Díaz, Mgs.',
+    profession:'Lic. Psicología, Mgs.', role:'Investigador Auxiliar 1',
+    initials:'YS', avatarFrom:'#f97316', avatarTo:'#ef4444',
+    email:'ysantiesteban@inspi.gob.ec',
+    photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/yasel-01-298x300.png',
+    linkedin:'https://ec.linkedin.com/in/yasel-santiesteban-4698b576',
+    scholar:'https://scholar.google.es/citations?user=VFiYehMAAAAJ&hl=es',
+    orcid:null,
+    researchgate:'https://www.researchgate.net/profile/Yasel-Santiesteban',
+    twitter:'https://x.com/yaselsantieste1',
+    trajectory:`Licenciado en Psicología y Magíster en Psicología de la Salud. Formado en Cuba con vínculo al Instituto Pedro Kourí. Radicado en Ecuador. Investigador Auxiliar 1 DTIDi INSPI. Tutor de tesis en U. de Guayaquil. Google Scholar: 165 citas, h-index=6, i10=5. Áreas: VIH/ITS, salud mental comunitaria post-pandemia/post-desastre, embarazo adolescente, microbiota-cerebro.`,
+    projects:[
+      'Determinantes psicosociales y conductas de riesgo hacia ITS (VIH, VPH) en grupos prioritarios en Guayaquil.',
+      'Eje Microbiota-Intestino-Cerebro/depresión (CIM).',
+      'Salud mental en contextos COVID-19 y desastres naturales (Cuba/Ecuador).'
+    ],
+    publications:[
+      'Conductas de riesgo hacia VIH (revisión) — Ciência & Saúde Coletiva 2019 (52 citas).',
+      'Salud mental y pandemia COVID-19 en Ecuador — INSPILIP 2021.',
+      'Dinámica de adquisición del VIH: definiciones de seropositivos cubanos — Rev. Cubana Med. Gen. Integral 2017.',
+      'Calidad de vida en adolescentes embarazadas en Guayaquil — UNEMI 2018 (15 citas).',
+      'Salud mental de cuidadores VIH/SIDA en Cuba — MEDICC Review 2012 (18 citas).'
+    ],
+    collab:`Sus variables de salud mental, conductas de riesgo y determinantes psicosociales se operacionalizan como capas predictoras en los modelos espaciales de ENT de EpiSIG. Colaboración natural: índice psicosocial georreferenciado (depresión, estrés, redes de soporte) que alimente los hot-spots de hipertensión/diabetes/VIH a nivel parroquial.`,
+    skills:['Psicología de la Salud','VIH / ITS','Determinantes Psicosociales','Salud Mental'],
+    sources:[
+      {label:'CIM Investigadores INSPI (foto, "Lcdo. Yasel Santiesteban Díaz MSc.")', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
+      {label:'Google Scholar – Yasel Santiesteban', url:'https://scholar.google.es/citations?user=VFiYehMAAAAJ&hl=es'},
+      {label:'ResearchGate – Yasel Santiesteban', url:'https://www.researchgate.net/profile/Yasel-Santiesteban'},
+      {label:'LinkedIn EC – Yasel Santiesteban (URL probable, no verificada)', url:'https://ec.linkedin.com/in/yasel-santiesteban-4698b576'},
+      {label:'X/Twitter – @YaselSantieste1', url:'https://x.com/yaselsantieste1'},
+      {label:'Ciência & Saúde Coletiva – Conductas de riesgo VIH', url:'https://cienciaesaudecoletiva.com.br/artigos/conductas-de-riesgo-hacia-la-infeccion-por-vih-una-revision-de-tendencias-emergentes/16304'},
+      {label:'INSPILIP – Salud mental y COVID-19 Ecuador', url:'https://www.inspilip.gob.ec/index.php/inspi/article/view/130'},
+      {label:'Rev. Cubana Med. Gen. Integral – Adquisición VIH', url:'https://revmgi.sld.cu/index.php/mgi/article/view/189'},
+      {label:'Repositorio UG – tesis con tutor Santiesteban', url:'http://repositorio.ug.edu.ec/browse?type=advisor&value=Santiesteban+D%C3%ADaz%2C+Yasel+Manuel'}
+    ]
+  },
+  {
+    name:'Méd. Presley Gruezo', fullName:'Presley Martin Gruezo Realpe',
+    profession:'Médico – Neurología', role:'Profesional de la Salud',
+    initials:'PG', avatarFrom:'#f59e0b', avatarTo:'#f97316',
+    email:'pgruezo@inspi.gob.ec',
+    photo:null, photoNote:'Sin foto pública verificable. (Existe avatar Scholar pero el enlace requiere autenticación.)',
+    linkedin:null,
+    scholar:'https://scholar.google.com/citations?hl=es&user=NxA3v3wAAAAJ',
+    orcid:'0000-0003-0397-345X',
+    researchgate:null, twitter:null,
+    trajectory:`Médico de la UCSG (Universidad Católica de Santiago de Guayaquil). Práctica clínica en Departamento de Neurología del Hospital Alfredo Paulson (Junta de Beneficencia de Guayaquil). Áreas declaradas en Scholar: Neurología, Neuroinmunología, Neurovascular, Reumatología. Google Scholar: 14 citas, h-index=2. Abstracts en AAN (American Academy of Neurology) 2022-2024. Médico-investigador joven con producción activa desde 2022.`,
+    projects:[
+      'Soporte clínico y validación diagnóstica en estudios observacionales del CIM-INSPI.',
+      'Investigación en stroke-heart syndrome (AAN 2022).',
+      'Manifestaciones neuropsiquiátricas en LES juvenil (AAN 2023).',
+      'Manifestaciones neurológicas post-COVID-19 (insomnia, burnout).'
+    ],
+    publications:[
+      'Stroke-heart Syndrome — Neurology (AAN abstract, 2022).',
+      'Neuropsychiatric Manifestations in Juvenile SLE — Neurology (AAN abstract, 2023).',
+      'Acute Hemorrhagic Necrotizing Encephalitis (TB-CNS) — Neurology (AAN abstract, 2024).',
+      'Insomnia en estudiantes de medicina durante COVID-19 — Neurology (AAN abstract).',
+      'Fases evolutivas de la neurocisticercosis — Rev. Medicina e Investigación Clínica Guayaquil 2023.',
+      'Eutanasia en Ecuador: Reflexiones Médicas y Jurídicas — Rev. Ecuatoriana de Neurología 2024.'
+    ],
+    collab:`EpiSIG produce modelos matemáticos de proyecciones de morbilidad (neurocisticercosis, ACV, manifestaciones neurológicas post-COVID) a escala cantonal — Gruezo puede validarlos contra casuística real del Hospital Paulson y series UCSG. Co-autoría natural en Revista Ecuatoriana de Neurología.`,
+    skills:['Neurología Clínica','Neuroinmunología','Neuroepidemiología','ACV / TB-SNC'],
+    sources:[
+      {label:'Google Scholar – Presley Gruezo Realpe', url:'https://scholar.google.com/citations?hl=es&user=NxA3v3wAAAAJ'},
+      {label:'ORCID 0000-0003-0397-345X', url:'https://orcid.org/0000-0003-0397-345X'},
+      {label:'Neurology AAN – Stroke-heart Syndrome', url:'https://www.neurology.org/doi/10.1212/WNL.0000000000204681'},
+      {label:'Neurology AAN – Juvenile SLE Neuropsychiatric', url:'https://www.neurology.org/doi/10.1212/WNL.0000000000204696'},
+      {label:'Neurology AAN – Acute Hemorrhagic Necrotizing Encephalitis', url:'https://www.neurology.org/doi/10.1212/WNL.0000000000214200'},
+      {label:'Neurology AAN – Insomnia in Medical Students', url:'https://www.neurology.org/doi/10.1212/WNL.0000000000203374'},
+      {label:'UCSG – sitio oficial', url:'https://www.ucsg.edu.ec/'}
+    ]
+  }]
+},
+{
+  id:'gestion', title:'Gestión Técnica I+D+i', icon:'📋',
+  gradient:'from-slate-500 to-gray-700', bg:'bg-slate-100', border:'border-slate-200', text:'text-slate-700',
+  desc:'Soporte operativo, logístico y documental.',
+  members:[
+  {
+    name:'Lissette Montoya Aliaga', fullName:'Lissette Viviana Montoya Aliaga',
+    profession:'Técnica Administrativa', role:'Servidor Público de Apoyo 4',
+    initials:'LM', avatarFrom:'#64748b', avatarTo:'#475569',
+    email:'lmontoya@inspi.gob.ec',
+    photo:null, photoNote:'Sin foto pública verificable.',
+    linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
+    trajectory:`Carrera administrativa interna en INSPI-Guayaquil: Servidora Pública de Apoyo 3 → Apoyo 4. Estudios en Idiomas (Facultad de Filosofía, U. de Guayaquil — segundo año, no concluido según fuente disponible). Sin producción científica indexada. Perfil netamente operativo con conocimiento institucional acumulado: movilizaciones de campo, control de informes, articulación interna.`,
+    projects:[
+      'Gestión y articulación de movilizaciones de investigadores de la DTIDi.',
+      'Control de informes de campo y seguimiento de entregables.'
+    ],
+    publications:[],
+    collab:`Contacto clave para procesos logísticos institucionales (Quipux, solicitudes de movilización) y seguimiento de entregables compartidos DTIDi-Guayaquil ↔ EpiSIG-CZ9. Lenguaje de procesos (fechas, responsables, entregables) más que técnico-epidemiológico.`,
+    skills:['Logística Institucional','Gestión Operativa','Quipux'],
+    sources:[
+      {label:'ZoomInfo – Lissette Montoya Aliaga', url:'https://www.zoominfo.com/p/Lissette-Montoya-aliaga/9280987483'},
+      {label:'INSPI DTIDi – sitio oficial', url:'https://www.investigacionsalud.gob.ec/direccion-tecnica-de-investigacion-desarrollo-e-innovacion/'}
+    ]
+  },
+  {
+    name:'Lic. María Fernanda Quiroz', fullName:'María Fernanda Quiroz Palacios',
+    profession:'Licenciada', role:'Analista Técnica IDI',
+    initials:'MQ', avatarFrom:'#6b7280', avatarTo:'#64748b',
+    email:'mquiroz@inspi.gob.ec',
+    photo:null, photoNote:'Sin foto pública verificable.',
+    linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
+    trajectory:`Licenciada. Cargo formal verificado vía ZoomInfo: Analista Técnica de Investigación, Desarrollo e Innovación en INSPI Dr. Leopoldo Izquieta Pérez, Guayaquil. Sin huella digital pública (LinkedIn, redes profesionales, publicaciones), consistente con perfil técnico-administrativo. Universidad y formación específica no localizadas en fuentes abiertas.`,
+    projects:[
+      'Levantamiento de requerimientos técnicos y consolidación de información para investigadores DTIDi.',
+      'Soporte administrativo y documentación oficial de proyectos.'
+    ],
+    publications:[],
+    collab:`Facilitadora para estructuración de informes y documentación oficial de proyectos conjuntos. Contacto para trazabilidad documental y requerimientos formales (Quipux, informes) DTIDi-EpiSIG.`,
+    skills:['Administración IDI','Documentación Técnica','Requerimientos'],
+    sources:[
+      {label:'ZoomInfo – Maria Quiroz Palacios', url:'https://www.zoominfo.com/p/Maria-Quiroz-palacios/8680953263'},
+      {label:'INSPI – El Instituto', url:'https://www.investigacionsalud.gob.ec/el-instituto/'}
+    ]
+  }]
+}
+];
+
+let currentTab = 'perfil';
+let currentMember = null;
+
+function renderApp() {
+  document.getElementById('clusters-root').innerHTML = CLUSTERS.map(cl => `
+    <div class="mb-14">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border ${cl.border} flex items-center justify-center text-2xl">${cl.icon}</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">${esc(cl.title)}</h2>
+          <p class="text-sm text-slate-500">${esc(cl.desc)}</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        ${cl.members.map((m,mi) => renderCard(m, mi, cl)).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function avatarStyle(m) { return `background:linear-gradient(135deg,${m.avatarFrom},${m.avatarTo})`; }
+
+function renderCard(m, mi, cl) {
+  const photoHtml = m.photo
+    ? `<div class="w-14 h-14 rounded-2xl overflow-hidden shadow-md relative" style="${avatarStyle(m)}"><img src="${esc(m.photo)}" alt="${esc(m.name)}" class="w-full h-full object-cover" onerror="this.style.display='none'"><span class="absolute inset-0 flex items-center justify-center text-white text-xl font-bold pointer-events-none" style="z-index:-1">${esc(m.initials)}</span></div>`
+    : `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl font-bold shadow-md" style="${avatarStyle(m)}">${esc(m.initials)}</div>`;
+  const s2 = m.skills.slice(0,2).map(s=>`<span class="chip bg-slate-50 border border-slate-100 text-slate-500">${esc(s)}</span>`).join('');
+  const more = m.skills.length>2 ? `<span class="chip bg-slate-50 border border-slate-100 text-slate-400">+${m.skills.length-2}</span>` : '';
+  const gradStops = cl.gradient.replace(/from-/g,'').replace(/to-/g,'').split(' ').map(x=>cssColor(x)).join(',');
+  return `
+    <div class="card bg-white rounded-2xl border border-slate-200 overflow-hidden cursor-pointer hover:border-indigo-200"
+         onclick="openModal('${esc(cl.id)}',${mi})">
+      <div class="h-2 w-full" style="background:linear-gradient(to right,${gradStops})"></div>
+      <div class="p-6 flex flex-col h-full">
+        <div class="flex justify-between items-start mb-4">
+          ${photoHtml}
+          <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <h3 class="font-bold text-slate-900 text-base leading-snug mb-1">${esc(m.name)}</h3>
+        <p class="text-xs text-slate-500 font-medium mb-3">${esc(m.profession)}</p>
+        <div class="chip ${cl.bg} ${cl.text} mb-4">${esc(m.role)}</div>
+        <div class="flex gap-1 flex-wrap">${s2}${more}</div>
+      </div>
+    </div>`;
+}
+
+const COLOR_MAP = {
+  'purple-500':'#a855f7','indigo-600':'#4f46e5','emerald-400':'#34d399','teal-600':'#0d9488',
+  'blue-500':'#3b82f6','indigo-500':'#6366f1','orange-400':'#fb923c','rose-500':'#f43f5e',
+  'slate-500':'#64748b','gray-700':'#374151'
+};
+function cssColor(cls) { return COLOR_MAP[cls.trim()] || '#64748b'; }
+
+function openModal(clusterId, mi) {
+  const cl = CLUSTERS.find(c=>c.id===clusterId);
+  currentMember = cl.members[mi];
+  currentTab = 'perfil';
+  renderModal(cl);
+  const ov = document.getElementById('modal-overlay');
+  ov.classList.remove('opacity-0','pointer-events-none');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const ov = document.getElementById('modal-overlay');
+  ov.classList.add('opacity-0','pointer-events-none');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+function renderModal(cl) {
+  const m = currentMember;
+  const photoHtml = m.photo
+    ? `<div class="w-24 h-24 rounded-3xl overflow-hidden shadow-xl mb-6 border-2 border-white/20 bg-white/10"><img src="${esc(m.photo)}" alt="${esc(m.name)}" class="w-full h-full object-cover" onerror="this.outerHTML='<div class=\\'w-full h-full flex items-center justify-center text-white text-4xl font-bold\\'>${esc(m.initials)}</div>'"></div>`
+    : `<div class="w-24 h-24 rounded-3xl bg-white/10 border border-white/20 flex items-center justify-center text-white text-4xl font-bold shadow-xl mb-6">${esc(m.initials)}</div>`;
+
+  const social = [];
+  if(m.linkedin) social.push(`<a href="${esc(m.linkedin)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="LinkedIn">${svgLinkedin()}</a>`);
+  if(m.scholar)  social.push(`<a href="${esc(m.scholar)}"  target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="Google Scholar">${svgScholar()}</a>`);
+  if(m.orcid)    social.push(`<a href="https://orcid.org/${esc(m.orcid)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="ORCID">${svgOrcid()}</a>`);
+  if(m.researchgate) social.push(`<a href="${esc(m.researchgate)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="ResearchGate">${svgRG()}</a>`);
+  if(m.twitter)  social.push(`<a href="${esc(m.twitter)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="Twitter/X">${svgX()}</a>`);
+
+  const orcidLine = m.orcid ? `<div class="text-xs mt-2 text-white/60 font-mono">ORCID: ${esc(m.orcid)}</div>` : '';
+
+  document.getElementById('modal-left').style.background = `linear-gradient(135deg,${m.avatarFrom},${m.avatarTo})`;
+  document.getElementById('modal-left').innerHTML = `
+    <button onclick="closeModal()" class="md:hidden absolute top-4 right-4 bg-white/20 p-1.5 rounded-full text-white hover:bg-white/30">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    ${photoHtml}
+    <h2 class="text-xl font-bold leading-tight mb-1 text-white">${esc(m.fullName)}</h2>
+    <p class="text-white/75 text-sm font-medium mb-4">${esc(m.profession)}</p>
+    <div class="inline-flex px-3 py-1 bg-white/20 rounded-lg text-sm font-semibold mb-4 text-white">${esc(m.role)}</div>
+    <a href="mailto:${esc(m.email)}" class="flex items-center gap-2 text-white/70 text-xs hover:text-white mb-6 transition-colors">
+      <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      ${esc(m.email)}
+    </a>
+    <div class="flex-grow">
+      <div class="text-xs font-bold uppercase tracking-widest text-white/50 mb-3">Especialidades</div>
+      <div class="flex flex-wrap gap-2">
+        ${m.skills.map(s=>`<span class="text-xs px-3 py-1 bg-black/20 rounded-full font-medium text-white">${esc(s)}</span>`).join('')}
+      </div>
+    </div>
+    ${social.length ? `<div class="flex gap-2 mt-6 pt-5 border-t border-white/20 flex-wrap">${social.join('')}</div>` : `<div class="mt-6 pt-5 border-t border-white/20 text-xs text-white/50">Sin perfiles públicos verificables.</div>`}
+    ${orcidLine}
+  `;
+
+  document.getElementById('modal-tabs').innerHTML = `
+    <button class="tab-btn pb-4 text-sm font-bold border-b-2 ${currentTab==='perfil'?'border-indigo-600 text-indigo-600':'border-transparent text-slate-500 hover:text-slate-800'}" onclick="switchTab('perfil')">Perfil Académico</button>
+    <button class="tab-btn pb-4 text-sm font-bold border-b-2 flex items-center gap-1.5 ${currentTab==='episig'?'border-indigo-600 text-indigo-600':'border-transparent text-slate-500 hover:text-slate-800'}" onclick="switchTab('episig')">⚡ Sinergia EpiSIG</button>
+    <button class="tab-btn pb-4 text-sm font-bold border-b-2 flex items-center gap-1.5 ${currentTab==='fuentes'?'border-indigo-600 text-indigo-600':'border-transparent text-slate-500 hover:text-slate-800'}" onclick="switchTab('fuentes')">🔗 Fuentes <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">${m.sources?m.sources.length:0}</span></button>
+    <button onclick="closeModal()" class="hidden md:block ml-auto text-slate-300 hover:text-slate-600 self-start mt-1">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  `;
+  renderTabContent();
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  const tabs = document.getElementById('modal-tabs').querySelectorAll('.tab-btn');
+  tabs.forEach(btn => {
+    const isActive = btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${tab}'`);
+    if(isActive) {
+      btn.classList.remove('border-transparent','text-slate-500');
+      btn.classList.add('border-indigo-600','text-indigo-600');
+    } else if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('switchTab')) {
+      btn.classList.add('border-transparent','text-slate-500');
+      btn.classList.remove('border-indigo-600','text-indigo-600');
+    }
+  });
+  renderTabContent();
+}
+
+function renderTabContent() {
+  const m = currentMember;
+  const el = document.getElementById('modal-content');
+
+  if(currentTab === 'perfil') {
+    const photoNoteHtml = m.photoNote
+      ? `<div class="mb-6 p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800"><strong>Foto:</strong> ${esc(m.photoNote)}</div>`
+      : '';
+    const pubsHtml = m.publications && m.publications.length > 0
+      ? `<section>
+          <h3 class="flex items-center gap-2 text-base font-bold text-slate-800 mb-4">📄 Publicaciones Destacadas</h3>
+          <ul class="space-y-3">${m.publications.map(p=>`<li class="flex gap-3"><div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"></div><span class="text-sm text-slate-600">${esc(p)}</span></li>`).join('')}</ul>
+        </section>`
+      : `<div class="p-4 rounded-xl bg-slate-50 text-sm text-slate-500 border border-slate-100">Sin publicaciones indexadas detectadas (perfil técnico-administrativo o ingreso reciente).</div>`;
+    const projHtml = m.projects && m.projects.length > 0
+      ? `<section>
+          <h3 class="flex items-center gap-2 text-base font-bold text-slate-800 mb-4">💼 Proyectos y Roles Destacados</h3>
+          <ul class="space-y-3">${m.projects.map(p=>`<li class="flex gap-3"><div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div><span class="text-sm text-slate-600 font-medium">${esc(p)}</span></li>`).join('')}</ul>
+        </section>`
+      : '';
+    el.innerHTML = `<div class="space-y-8 anim">
+      ${photoNoteHtml}
+      <section>
+        <h3 class="flex items-center gap-2 text-base font-bold text-slate-800 mb-3">🏆 Trayectoria Profesional</h3>
+        <p class="text-slate-600 leading-relaxed text-sm">${esc(m.trajectory)}</p>
+      </section>
+      ${projHtml}
+      ${pubsHtml}
+    </div>`;
+  } else if(currentTab === 'episig') {
+    el.innerHTML = `<div class="anim h-full flex flex-col">
+      <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-8 border border-indigo-100 flex-grow">
+        <h3 class="text-lg font-bold text-indigo-900 mb-4 flex items-center gap-3">⚡ Propuesta de Colaboración</h3>
+        <p class="text-indigo-800 leading-relaxed text-sm">${esc(m.collab)}</p>
+        <div class="mt-8 pt-6 border-t border-indigo-200/50">
+          <p class="text-xs text-indigo-600 font-semibold mb-3 uppercase tracking-wide">Acción sugerida para la reunión:</p>
+          <div class="bg-white/60 p-4 rounded-xl text-sm text-slate-700 flex items-start gap-3 shadow-sm">
+            <span class="text-indigo-500 shrink-0">→</span>
+            <span>Presentar casos de éxito de EpiSIG relacionados con <strong class="text-indigo-900">${esc(m.skills[0])}</strong>${m.skills[1]?' y <strong class="text-indigo-900">'+esc(m.skills[1])+'</strong>':''}.</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  } else if(currentTab === 'fuentes') {
+    const sources = m.sources || [];
+    el.innerHTML = `<div class="anim space-y-4">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-sm text-emerald-900 mb-2">
+        <strong>🛡 Trazabilidad:</strong> Toda la información de este perfil se basa en las ${sources.length} fuentes públicas listadas abajo. Haz clic en cada enlace para verificar directamente.
+      </div>
+      <ul class="space-y-1">
+        ${sources.map((s,i)=>`
+          <li>
+            <a href="${esc(s.url)}" target="_blank" rel="noreferrer" class="src-link text-sm text-slate-700 hover:text-indigo-700 group">
+              <span class="text-xs font-mono text-slate-400 mt-0.5 shrink-0">${String(i+1).padStart(2,'0')}.</span>
+              <div class="flex-1 min-w-0">
+                <div class="font-medium">${esc(s.label)}</div>
+                <div class="text-xs text-slate-400 group-hover:text-indigo-500 truncate">${esc(s.url)}</div>
+              </div>
+              <svg class="w-4 h-4 text-slate-300 group-hover:text-indigo-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </li>`).join('')}
+      </ul>
+      ${sources.length === 0 ? '<div class="p-4 text-sm text-slate-500">Sin fuentes adicionales disponibles.</div>' : ''}
+    </div>`;
+  }
+}
+
+function svgLinkedin() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`; }
+function svgScholar() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5z"/></svg>`; }
+function svgOrcid() { return `<svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.731-1.566 3.731-3.722 0-2.072-1.241-3.722-3.731-3.722h-2.297z"/></svg>`; }
+function svgRG() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.586 0H4.414A4.414 4.414 0 000 4.414v15.172A4.414 4.414 0 004.414 24h15.172A4.414 4.414 0 0024 19.586V4.414A4.414 4.414 0 0019.586 0zM9.3 16.8H6.9V7.2h2.4v9.6zm-1.2-10.8a1.35 1.35 0 110-2.7 1.35 1.35 0 010 2.7zm10.5 10.8h-2.4v-4.8c0-.9-.75-1.5-1.5-1.5s-1.5.6-1.5 1.5v4.8h-2.4V7.2h2.4v1.2c.6-.9 1.65-1.5 2.7-1.5 1.95 0 3.15 1.35 3.15 3.3v6.6z"/></svg>`; }
+function svgX() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`; }
+
+renderApp();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# OneDrive / Windows
+desktop.ini
+Thumbs.db
+*.tmp
+~$*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
