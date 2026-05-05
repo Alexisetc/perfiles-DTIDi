@@ -3,78 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DTIDi × EpiSIG — Directorio Estratégico Guayaquil</title>
+<title>Organigrama Estratégico DTIDi × EpiSIG — INSPI Guayaquil</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  @keyframes fadeSlide { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-  .anim { animation: fadeSlide .28s ease-out; }
-  .card { transition: transform .25s ease, box-shadow .25s ease; }
-  .card:hover { transform:translateY(-5px); box-shadow:0 20px 40px rgba(0,0,0,.12); }
-  .tab-btn { transition: color .15s, border-color .15s; }
-  .social-btn { transition: background .2s, transform .2s; }
-  .social-btn:hover { transform: scale(1.1); }
-  #modal-overlay { transition: opacity .2s ease; }
-  .photo-wrap img { object-fit:cover; width:100%; height:100%; }
-  .chip { display:inline-flex; align-items:center; font-size:.6rem; padding:.2rem .55rem; border-radius:.3rem; font-weight:600; letter-spacing:.03em; }
-  .src-link { display:flex; align-items:flex-start; gap:.5rem; padding:.45rem .65rem; border-radius:.5rem; transition: background .15s; word-break:break-word; }
-  .src-link:hover { background:#eef2ff; }
+  body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .anim-fade { animation: fadeIn 0.2s ease-out; }
+  .anim-slide { animation: slideUp 0.3s ease-out forwards; }
+
+  .org-node { transition: all 0.2s ease; }
+  .org-node:hover { transform: translateY(-3px); border-color: #60a5fa; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 </style>
 </head>
-<body class="bg-slate-50 min-h-screen" style="font-family:'Inter',system-ui,sans-serif">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+<!-- HEADER INSTITUCIONAL -->
+<header class="bg-[#0f172a] text-white border-b border-slate-800 shadow-sm relative z-10 shrink-0">
+  <div class="max-w-[1400px] mx-auto px-6 py-10 lg:py-12 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-blue-900/50 text-blue-300 text-[10px] font-bold mb-4 tracking-widest uppercase border border-blue-800/50">
+        <i data-lucide="network" class="w-3 h-3"></i> Estructura Organizacional
+      </div>
+      <h1 class="text-3xl lg:text-4xl font-light tracking-tight mb-2">
+        <strong class="font-bold text-white">DTIDi</strong> <span class="text-slate-500 mx-2">×</span> <strong class="font-bold text-white">EpiSIG</strong>
+      </h1>
+      <h2 class="text-lg text-slate-300 font-medium mb-3">Organigrama Técnico — Centro de Investigación Multidisciplinario Guayaquil</h2>
+      <p class="text-sm text-slate-400 leading-relaxed">
+        Estructura jerárquica y operativa destinada a identificar vectores de colaboración institucional. Toda la información ha sido triangulada a través de fuentes públicas verificables (PubMed, ResearchGate, ORCID, sitio oficial INSPI/MSP, INSPILIP, Google Scholar).
+      </p>
+      <div class="mt-4 text-xs text-slate-500 flex items-center gap-2">
+        <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Fecha de corte: Mayo 2026 — investigación automatizada en paralelo (11 agentes)
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4 shrink-0 bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
+      <div class="text-left px-4 border-r border-slate-700">
+        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Funcionarios</div>
+        <div class="text-3xl font-bold text-white">11</div>
+      </div>
+      <div class="text-left px-4 border-r border-slate-700">
+        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Departamentos</div>
+        <div class="text-3xl font-bold text-blue-400">4</div>
+      </div>
+      <div class="text-left px-4 border-r border-slate-700">
+        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Fotos verif.</div>
+        <div class="text-3xl font-bold text-emerald-400 flex items-center gap-1">
+          6 <i data-lucide="badge-check" class="w-5 h-5 text-emerald-500"></i>
+        </div>
+      </div>
+      <div class="text-left px-4">
+        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Fuentes citadas</div>
+        <div class="text-3xl font-bold text-amber-400">~70</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT - ORGANIGRAMA -->
+<main class="flex-grow bg-slate-50 w-full overflow-x-auto relative">
+  <div id="clusters-root" class="min-h-full"></div>
+</main>
 
 <!-- MODAL OVERLAY -->
-<div id="modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none">
-  <div id="modal-bg" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
-  <div id="modal-box" class="relative bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[92vh] flex flex-col md:flex-row overflow-hidden anim">
-    <div id="modal-left" class="w-full md:w-72 shrink-0 p-8 text-white flex flex-col relative"></div>
-    <div class="flex-1 flex flex-col overflow-hidden bg-white">
-      <div id="modal-tabs" class="flex px-8 pt-7 border-b border-slate-100 gap-6 shrink-0 flex-wrap"></div>
-      <div id="modal-content" class="p-8 overflow-y-auto flex-1"></div>
+<div id="modal-overlay" class="fixed inset-0 z-50 hidden flex-col items-center justify-center p-4 sm:p-6">
+  <div id="modal-bg" class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+
+  <div id="modal-box" class="relative bg-white w-full max-w-5xl h-[90vh] sm:h-auto sm:max-h-[88vh] rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden anim-slide border border-slate-200">
+    <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 p-6 flex flex-col overflow-y-auto shrink-0 relative">
+      <button onclick="closeModal()" class="md:hidden absolute top-4 right-4 text-slate-400 hover:text-slate-700 bg-white rounded-full p-1 shadow-sm border border-slate-200">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="modal-sidebar-content" class="flex flex-col h-full"></div>
     </div>
+
+    <div class="w-full md:w-2/3 flex flex-col bg-white overflow-hidden">
+      <div class="bg-white px-6 pt-6 border-b border-slate-200 shrink-0">
+        <div id="modal-tabs" class="flex gap-6 flex-wrap"></div>
+      </div>
+      <div id="modal-content" class="p-6 overflow-y-auto flex-grow bg-white"></div>
+    </div>
+
+    <button onclick="closeModal()" class="hidden md:flex absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors">
+      <i data-lucide="x" class="w-6 h-6"></i>
+    </button>
   </div>
 </div>
 
-<!-- APP -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 pb-20">
-  <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100 mb-12">
-    <div>
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold mb-4 tracking-wide uppercase">
-        ⚡ Directorio Estratégico
-      </div>
-      <h1 class="text-4xl font-black text-slate-900 tracking-tight">DTIDi <span class="text-slate-300">×</span> EpiSIG</h1>
-      <p class="text-slate-500 mt-2 max-w-xl">Perfiles del Centro de Investigación Multidisciplinario — Guayaquil. Cada ficha incluye <strong>fuentes verificables</strong> para validar la información. Investigación: mayo 2026.</p>
-    </div>
-    <div class="flex gap-3 shrink-0">
-      <div class="text-center px-6 py-4 bg-slate-50 rounded-2xl border border-slate-100">
-        <div class="text-3xl font-black text-slate-800">11</div>
-        <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Funcionarios</div>
-      </div>
-      <div class="text-center px-6 py-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-        <div class="text-3xl font-black text-emerald-600">6</div>
-        <div class="text-xs text-emerald-600 font-semibold uppercase tracking-wider">Fotos verif.</div>
-      </div>
-      <div class="text-center px-6 py-4 bg-indigo-50 rounded-2xl border border-indigo-100">
-        <div class="text-3xl font-black text-indigo-600">5</div>
-        <div class="text-xs text-indigo-500 font-semibold uppercase tracking-wider">Clusters</div>
-      </div>
-    </div>
+<!-- FOOTER -->
+<footer class="bg-white border-t border-slate-200 py-4 shrink-0 z-10">
+  <div class="max-w-[1400px] mx-auto px-6 text-center">
+    <p class="text-[11px] text-slate-400">
+      <strong>Alexis Núñez López</strong> · Analista Zonal GIDI / EpiSIG · Coordinación Zonal 9 INSPI Quito · Mayo 2026 ·
+      <a href="https://github.com/Alexisetc/perfiles-DTIDi" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+    </p>
   </div>
-
-  <div id="clusters-root"></div>
-</div>
+</footer>
 
 <script>
 const esc = s => s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : '';
 
 const CLUSTERS = [
 {
-  id:'liderazgo', title:'Liderazgo Estratégico', icon:'🔭',
-  gradient:'from-purple-500 to-indigo-600', bg:'bg-purple-50', border:'border-purple-200', text:'text-purple-700',
-  desc:'Dirección institucional, avales y política de investigación.',
+  id:'liderazgo', title:'Liderazgo Estratégico', icon:'microscope',
+  desc:'Dirección, avales y política de investigación.',
   members:[{
     name:'Dra. Sunny Sánchez Giler', fullName:'Sunny Eunice Sánchez Giler, PhD',
     profession:'Médico, PhD', role:'Directora Técnica DTIDi',
-    initials:'SS', avatarFrom:'#7c3aed', avatarTo:'#4338ca',
+    initials:'SS',
     email:'ssanchez@inspi.gob.ec',
     photo:'https://www.investigacionsalud.gob.ec/wp-content/uploads/2026/02/WhatsApp-Image-2026-01-19-at-11.20.47-AM.jpeg',
     linkedin:null, scholar:null, orcid:null,
@@ -105,19 +148,18 @@ const CLUSTERS = [
       {label:'Rev. Cubana Med. Tropical – Neurocriptococosis', url:'https://revmedtropical.sld.cu/index.php/medtropical/article/view/123/107'},
       {label:'INSPILIP – Sepsis Cryptococcus', url:'https://www.inspilip.gob.ec/index.php/inspi/article/view/102'},
       {label:'Equipo editorial INSPILIP', url:'https://www.inspilip.gob.ec/OJS/index.php/inspi/about/editorialTeam'},
-      {label:'Conferencia magistral INSPI 2019', url:'https://www.investigacionsalud.gob.ec/wp-content/uploads/certificados/CONFERENCIA%20MAGISTRAL%20%E2%80%9CDESAFIOS%20ACTUALES%20EN%20EL%20MANEJO%20CLINICO%E2%80%9D/SUNNY%20SANCHEZ_signed.pdf'}
+      {label:'Conferencia magistral INSPI 2019 (firmada)', url:'https://www.investigacionsalud.gob.ec/wp-content/uploads/certificados/CONFERENCIA%20MAGISTRAL%20%E2%80%9CDESAFIOS%20ACTUALES%20EN%20EL%20MANEJO%20CLINICO%E2%80%9D/SUNNY%20SANCHEZ_signed.pdf'}
     ]
   }]
 },
 {
-  id:'infecciones', title:'Infecciones Emergentes & Vectores', icon:'🦠',
-  gradient:'from-emerald-400 to-teal-600', bg:'bg-emerald-50', border:'border-emerald-200', text:'text-emerald-700',
+  id:'infecciones', title:'Infecciones Emergentes', icon:'bug',
   desc:'Zoonosis, arbovirosis, virología respiratoria y serpentario.',
   members:[
   {
     name:'Dr. Solón Alberto Orlando', fullName:'Solón Alberto Orlando Narváez',
     profession:'Méd. Veterinario, Mgs.', role:'Investigador Auxiliar 1',
-    initials:'SO', avatarFrom:'#059669', avatarTo:'#0d9488',
+    initials:'SO',
     email:'aorlando@inspi.gob.ec',
     photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/orlando-1017x1024.png',
     linkedin:null, scholar:null, orcid:null,
@@ -142,10 +184,10 @@ const CLUSTERS = [
     sources:[
       {label:'CV oficial INSPI – Alberto Orlando 2020', url:'https://www.investigacionsalud.gob.ec/wp-content/uploads/2020/08/cv-alberto-2020-agosto.pdf'},
       {label:'CIM Investigadores INSPI (foto)', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
-      {label:'Nuevo Director Ejecutivo INSPI (anuncio MSP)', url:'https://www.investigacionsalud.gob.ec/nuevo-director-ejecutivo-del-instituto-nacional-de-investigacion-en-salud-publica-inspi-dr-leopoldo-izquieta-perez/'},
+      {label:'Anuncio MSP – Director Ejecutivo INSPI', url:'https://www.investigacionsalud.gob.ec/nuevo-director-ejecutivo-del-instituto-nacional-de-investigacion-en-salud-publica-inspi-dr-leopoldo-izquieta-perez/'},
       {label:'ResearchGate – Alberto Orlando', url:'https://www.researchgate.net/profile/Alberto-Orlando'},
       {label:'PMC – Leptospirosis in Ecuador 2023', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC10141158/'},
-      {label:'PMC – Leptospirosis hospitalized cases Ecuador 2000-2020', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC9129009/'},
+      {label:'PMC – Leptospirosis hospitalized cases 2000-2020', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC9129009/'},
       {label:'Manual Chagas Ecuador 2020 (MSP)', url:'https://www.salud.gob.ec/wp-content/uploads/2026/02/Chagas-2020-manual-vigilancia-control.pdf'},
       {label:'Manual Resistencia Insecticidas 2019 (RG)', url:'https://www.researchgate.net/publication/370582402'},
       {label:'TIE Ecuador – sitio INSPI', url:'https://www.investigacionsalud.gob.ec/desarrollo-de-la-tecnica-del-insecto-esteril-en-ecuador/'},
@@ -155,7 +197,7 @@ const CLUSTERS = [
   {
     name:'Mgs. Doménica De Mora', fullName:'Doménica Joseth De Mora Coloma, Mgs.',
     profession:'Bióloga, Mgs.', role:'Investigador Agregado 2',
-    initials:'DM', avatarFrom:'#10b981', avatarTo:'#0d9488',
+    initials:'DM',
     email:'ddemora@inspi.gob.ec',
     photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/domenica1-01-1017x1024.png',
     linkedin:'https://www.linkedin.com/in/dom%C3%A9nica-de-mora-coloma-6a7701122/',
@@ -177,10 +219,10 @@ const CLUSTERS = [
       'First report SARS-CoV-2 B.1.1.7 (Alpha) Ecuador — Dovepress IDR 2021.',
       'Evolución genética influenza América Latina 2017-18.'
     ],
-    collab:`Sus bases de datos de vigilancia centinela (RSV/influenza/SARS-CoV-2 con metadatos cantonales y temporales) son la materia prima ideal para econometría espacial de EpiSIG. Propuesta: modelo predictivo de inicio/duración de temporada RSV por cantón + tablero de vigilancia genómica georreferenciado para H5N1.`,
+    collab:`Sus bases de datos de vigilancia centinela (RSV/influenza/SARS-CoV-2 con metadatos cantonales y temporales) son la materia prima ideal para econometría espacial. Propuesta: modelo predictivo de inicio/duración de temporada RSV por cantón + tablero de vigilancia genómica georreferenciado para H5N1.`,
     skills:['Virología Respiratoria','Vigilancia Genómica','RSV / Influenza / H5N1','GISAID'],
     sources:[
-      {label:'CIM Investigadores INSPI (foto, "Bgla. Domenica Joseth De Mora Coloma Msg.")', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
+      {label:'CIM Investigadores INSPI (foto, "Bgla. Domenica De Mora Coloma Msg.")', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
       {label:'LinkedIn – Doménica De Mora Coloma', url:'https://www.linkedin.com/in/dom%C3%A9nica-de-mora-coloma-6a7701122/'},
       {label:'ResearchGate – Domenica Mora', url:'https://www.researchgate.net/profile/Domenica-Mora'},
       {label:'PMC – Impacto NPIs COVID-19 Ecuador 2023', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC10563623/'},
@@ -193,10 +235,10 @@ const CLUSTERS = [
   },
   {
     name:'Mgs. María del Carmen Terán', fullName:'María del Carmen Terán Zavala, Mgs.',
-    profession:'Bióloga, Mgs.', role:'Responsable Técnico Serpentario',
-    initials:'MT', avatarFrom:'#0d9488', avatarTo:'#0891b2',
+    profession:'Bióloga, Mgs.', role:'Resp. Técnico Serpentario',
+    initials:'MT',
     email:'mteranz@inspi.gob.ec',
-    photo:null, photoNote:'Sin foto pública con etiqueta nominal verificable. Aparece en notas grupales del Serpentario sin caption con su nombre.',
+    photo:null, photoNote:'Sin foto pública con etiqueta nominal verificable. Aparece en notas grupales del Serpentario sin caption explícito con su nombre.',
     linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
     trajectory:`Bióloga (título "Dra. Biol." en uso institucional) y Magíster. Responsable del Serpentario INSPI (sede Hospital Guasmo Sur, Guayaquil) desde al menos 2016. Experta en herpetología, venómica de vipéridos ecuatorianos y hemoparásitos. Red activa con Instituto Clodomiro Picado (Costa Rica) — Bruno Lomonte y Mahmood Sasa —, CSIC España (Juan J. Calvete) y FIOCRUZ Brasil. Capacitadora del MSP en manejo clínico ofídico.`,
     projects:[
@@ -224,20 +266,17 @@ const CLUSTERS = [
   }]
 },
 {
-  id:'biologia', title:'One Health & Biología Molecular', icon:'🧬',
-  gradient:'from-blue-500 to-indigo-500', bg:'bg-blue-50', border:'border-blue-200', text:'text-blue-700',
-  desc:'Microbiota, zoonosis urbanas y biotecnología aplicada.',
+  id:'biologia', title:'One Health & Genómica', icon:'dna',
+  desc:'Microbiota, zoonosis urbanas y biotecnología.',
   members:[
   {
-    name:'Ing. David Guizado Herrera', fullName:'David Andrés Guizado Herrera',
+    name:'Ing. David Guizado', fullName:'David Andrés Guizado Herrera',
     profession:'Ingeniero Químico', role:'Analista IDI 2',
-    initials:'DG', avatarFrom:'#2563eb', avatarTo:'#4338ca',
+    initials:'DG',
     email:'dguizado@inspi.gob.ec',
     photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/23-012-1016x1024.png',
     linkedin:'https://www.linkedin.com/in/david-andr%C3%A9s-guizado-herrera-393645181/',
-    scholar:null,
-    orcid:'0000-0002-5948-9889',
-    researchgate:null, twitter:null,
+    scholar:null, orcid:'0000-0002-5948-9889', researchgate:null, twitter:null,
     trajectory:`Ingeniero Químico (Universidad de Guayaquil) + Maestría VIU–Universidad Internacional de Valencia (España). Trayectoria: pasante/tesista Fundación Bioelit + U. Guayaquil → vigilancia ambiental INSPI (SARS-CoV-2 en aguas residuales costeras, 2022) → Analista IDI 2 con extensión hacia One Health. Revisor par para PLOS ONE (2025).`,
     projects:[
       'Vigilancia SARS-CoV-2 en aguas residuales y recreativas de la costa ecuatoriana (PLOS ONE 2024).',
@@ -253,7 +292,7 @@ const CLUSTERS = [
       'Eje Microbiota-Intestino-Cerebro y su relación con la depresión — Revista INSPILIP 2025.'
     ],
     collab:`EpiSIG aporta pipelines reproducibles en R/Python (DADA2, QIIME2, phyloseq) para análisis 16S/metagenómica y correlaciones espacio-temporales One Health. Colaboración natural: piloto que vincule muestreo de microbiota/leptospiras con variables ambientales y epidemiológicas zonales.`,
-    skills:['Bioquímica','Microbiota','One Health','Bioinformática'],
+    skills:['Bioquímica Ambiental','Microbiota','One Health','Bioinformática'],
     sources:[
       {label:'CIM Investigadores INSPI (foto, "Ing. David Andrés Guizado Herrera")', url:'https://www.investigacionsalud.gob.ec/webs/cim/personal/investigadores/'},
       {label:'LinkedIn – David Guizado Herrera', url:'https://www.linkedin.com/in/david-andr%C3%A9s-guizado-herrera-393645181/'},
@@ -266,12 +305,12 @@ const CLUSTERS = [
     ]
   },
   {
-    name:'Ing. Naomi Mora Jaramillo', fullName:'Naomi Daniela Mora Jaramillo',
+    name:'Ing. Naomi Mora', fullName:'Naomi Daniela Mora Jaramillo',
     profession:'Ing. en Biotecnología, Summa Cum Laude', role:'Analista IDI 2',
-    initials:'NM', avatarFrom:'#3b82f6', avatarTo:'#0ea5e9',
+    initials:'NM',
     email:'nmora@inspi.gob.ec',
     photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/noemi-mora-01-1017x1024.png',
-    photoNote:'⚠ Foto del directorio CIM-INSPI etiquetada como "Naomí Daniela Mora Zambrano" (apellido materno distinto al "Jaramillo" oficial). Mismo cargo, misma sede; probable error de apellido en la página o uso alternativo. Verificar en persona.',
+    photoNote:'⚠ Foto del directorio CIM-INSPI etiquetada como "Naomí Daniela Mora Zambrano" (apellido materno distinto al "Jaramillo" oficial). Mismo cargo, misma sede; probable error en la página o uso alternativo. Verificar en persona.',
     linkedin:'https://www.linkedin.com/in/naomi-mora-jaramillo-8081a7195/',
     scholar:null, orcid:null, researchgate:null, twitter:null,
     trajectory:`Ingeniera en Biotecnología graduada Summa Cum Laude. Analista IDI 2 en el laboratorio multidisciplinario del CIM-INSPI-Guayaquil, en colaboración con UDLA (García-Bereguiain). Línea dominante: One Health y zoonosis urbanas en Guayaquil (no neurobiología). Coautora desde 2024 en estudios de SARS-CoV-2 en fauna sinantrópica, leptospirosis y fitopatología.`,
@@ -303,9 +342,9 @@ const CLUSTERS = [
   {
     name:'Ing. Fiorella Rodriguez', fullName:'Fiorella Fernanda Rodriguez Espinosa',
     profession:'Ing. en Biotecnología', role:'Profesional en Biotecnología',
-    initials:'FR', avatarFrom:'#0ea5e9', avatarTo:'#2563eb',
+    initials:'FR',
     email:'frodriguez@inspi.gob.ec',
-    photo:null, photoNote:'Sin foto pública verificable.',
+    photo:null, photoNote:'Sin foto pública verificable. Huella digital mínima — sin perfiles indexados en LinkedIn/ORCID/RG/Scholar.',
     linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
     trajectory:`Ingeniera en Biotecnología. Huella digital pública mínima — sin perfil en LinkedIn/ORCID/RG/Scholar localizado, ni tesis pública en repositorio USFQ. Compatible con graduación reciente (2022-2025) y entrada al sector público antes de publicar. Su trabajo concreto en INSPI no está documentado en fuentes abiertas — recomendable solicitar CV/ORCID en la reunión.`,
     projects:[
@@ -316,27 +355,24 @@ const CLUSTERS = [
     collab:`EpiSIG puede colaborar en diseño experimental (DoE), análisis de varianza bioestadística y procesamiento estadístico de datos PCR/qPCR para validación de protocolos de laboratorio.`,
     skills:['Biotecnología','Biología Molecular','Diseño Experimental'],
     sources:[
-      {label:'INSPI – sitio oficial (única referencia institucional confirmable)', url:'https://www.investigacionsalud.gob.ec/'},
+      {label:'INSPI – sitio oficial (única referencia institucional)', url:'https://www.investigacionsalud.gob.ec/'},
       {label:'DTIDi INSPI', url:'https://www.investigacionsalud.gob.ec/direccion-tecnica-de-investigacion-desarrollo-e-innovacion/'}
     ]
   }]
 },
 {
-  id:'salud', title:'Salud Mental & Clínica', icon:'🧠',
-  gradient:'from-orange-400 to-rose-500', bg:'bg-orange-50', border:'border-orange-200', text:'text-orange-700',
-  desc:'Determinantes psicosociales y neurología clínica.',
+  id:'salud', title:'Determinantes Clínicos', icon:'brain',
+  desc:'Factores psicosociales y casuística neurológica.',
   members:[
   {
     name:'Mgs. Yasel Santiesteban', fullName:'Yasel Manuel Santiesteban Díaz, Mgs.',
     profession:'Lic. Psicología, Mgs.', role:'Investigador Auxiliar 1',
-    initials:'YS', avatarFrom:'#f97316', avatarTo:'#ef4444',
+    initials:'YS',
     email:'ysantiesteban@inspi.gob.ec',
     photo:'https://www.investigacionsalud.gob.ec/webs/cim/wp-content/uploads/2023/01/yasel-01-298x300.png',
     linkedin:'https://ec.linkedin.com/in/yasel-santiesteban-4698b576',
     scholar:'https://scholar.google.es/citations?user=VFiYehMAAAAJ&hl=es',
-    orcid:null,
-    researchgate:'https://www.researchgate.net/profile/Yasel-Santiesteban',
-    twitter:'https://x.com/yaselsantieste1',
+    orcid:null, researchgate:'https://www.researchgate.net/profile/Yasel-Santiesteban', twitter:'https://x.com/yaselsantieste1',
     trajectory:`Licenciado en Psicología y Magíster en Psicología de la Salud. Formado en Cuba con vínculo al Instituto Pedro Kourí. Radicado en Ecuador. Investigador Auxiliar 1 DTIDi INSPI. Tutor de tesis en U. de Guayaquil. Google Scholar: 165 citas, h-index=6, i10=5. Áreas: VIH/ITS, salud mental comunitaria post-pandemia/post-desastre, embarazo adolescente, microbiota-cerebro.`,
     projects:[
       'Determinantes psicosociales y conductas de riesgo hacia ITS (VIH, VPH) en grupos prioritarios en Guayaquil.',
@@ -367,14 +403,11 @@ const CLUSTERS = [
   {
     name:'Méd. Presley Gruezo', fullName:'Presley Martin Gruezo Realpe',
     profession:'Médico – Neurología', role:'Profesional de la Salud',
-    initials:'PG', avatarFrom:'#f59e0b', avatarTo:'#f97316',
+    initials:'PG',
     email:'pgruezo@inspi.gob.ec',
-    photo:null, photoNote:'Sin foto pública verificable. (Existe avatar Scholar pero el enlace requiere autenticación.)',
-    linkedin:null,
-    scholar:'https://scholar.google.com/citations?hl=es&user=NxA3v3wAAAAJ',
-    orcid:'0000-0003-0397-345X',
-    researchgate:null, twitter:null,
-    trajectory:`Médico de la UCSG (Universidad Católica de Santiago de Guayaquil). Práctica clínica en Departamento de Neurología del Hospital Alfredo Paulson (Junta de Beneficencia de Guayaquil). Áreas declaradas en Scholar: Neurología, Neuroinmunología, Neurovascular, Reumatología. Google Scholar: 14 citas, h-index=2. Abstracts en AAN (American Academy of Neurology) 2022-2024. Médico-investigador joven con producción activa desde 2022.`,
+    photo:null, photoNote:'Sin foto pública verificable directa (existe avatar Scholar pero el enlace requiere autenticación).',
+    linkedin:null, scholar:'https://scholar.google.com/citations?hl=es&user=NxA3v3wAAAAJ', orcid:'0000-0003-0397-345X', researchgate:null, twitter:null,
+    trajectory:`Médico de la UCSG (Universidad Católica de Santiago de Guayaquil). Práctica clínica en Departamento de Neurología del Hospital Alfredo Paulson (Junta de Beneficencia de Guayaquil). Áreas declaradas en Scholar: Neurología, Neuroinmunología, Neurovascular, Reumatología. Google Scholar: 14 citas, h-index=2. Abstracts en AAN (American Academy of Neurology) 2022-2024.`,
     projects:[
       'Soporte clínico y validación diagnóstica en estudios observacionales del CIM-INSPI.',
       'Investigación en stroke-heart syndrome (AAN 2022).',
@@ -403,14 +436,13 @@ const CLUSTERS = [
   }]
 },
 {
-  id:'gestion', title:'Gestión Técnica I+D+i', icon:'📋',
-  gradient:'from-slate-500 to-gray-700', bg:'bg-slate-100', border:'border-slate-200', text:'text-slate-700',
-  desc:'Soporte operativo, logístico y documental.',
+  id:'gestion', title:'Gestión Operativa I+D+i', icon:'clipboard-list',
+  desc:'Articulación administrativa y documental.',
   members:[
   {
-    name:'Lissette Montoya Aliaga', fullName:'Lissette Viviana Montoya Aliaga',
-    profession:'Técnica Administrativa', role:'Servidor Público de Apoyo 4',
-    initials:'LM', avatarFrom:'#64748b', avatarTo:'#475569',
+    name:'Lissette Montoya', fullName:'Lissette Viviana Montoya Aliaga',
+    profession:'Técnica Administrativa', role:'Servidor de Apoyo 4',
+    initials:'LM',
     email:'lmontoya@inspi.gob.ec',
     photo:null, photoNote:'Sin foto pública verificable.',
     linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
@@ -430,7 +462,7 @@ const CLUSTERS = [
   {
     name:'Lic. María Fernanda Quiroz', fullName:'María Fernanda Quiroz Palacios',
     profession:'Licenciada', role:'Analista Técnica IDI',
-    initials:'MQ', avatarFrom:'#6b7280', avatarTo:'#64748b',
+    initials:'MQ',
     email:'mquiroz@inspi.gob.ec',
     photo:null, photoNote:'Sin foto pública verificable.',
     linkedin:null, scholar:null, orcid:null, researchgate:null, twitter:null,
@@ -454,210 +486,281 @@ let currentTab = 'perfil';
 let currentMember = null;
 
 function renderApp() {
-  document.getElementById('clusters-root').innerHTML = CLUSTERS.map(cl => `
-    <div class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border ${cl.border} flex items-center justify-center text-2xl">${cl.icon}</div>
-        <div>
-          <h2 class="text-2xl font-bold text-slate-800">${esc(cl.title)}</h2>
-          <p class="text-sm text-slate-500">${esc(cl.desc)}</p>
+  const root = document.getElementById('clusters-root');
+  const rootCluster = CLUSTERS.find(c => c.id === 'liderazgo');
+  const branches = CLUSTERS.filter(c => c.id !== 'liderazgo');
+  const lineInset = (100 / branches.length) / 2;
+
+  let html = `
+    <div class="flex justify-center min-w-max pb-20 pt-10 px-10">
+      <div class="flex flex-col items-center w-full">
+        <div class="w-80 relative z-20">
+          ${renderNode(rootCluster.members[0], 0, rootCluster.id, true)}
+        </div>
+        <div class="w-0.5 h-10 bg-slate-300"></div>
+        <div class="flex flex-row justify-center relative w-full">
+          <div class="absolute top-0 bg-slate-300 h-0.5" style="left: ${lineInset}%; right: ${lineInset}%;"></div>
+          ${branches.map(cl => `
+            <div class="flex-1 w-[320px] px-4 flex flex-col items-center relative">
+              <div class="w-0.5 h-8 bg-slate-300"></div>
+              <div class="bg-white border-t-4 border-blue-500 rounded-lg p-4 w-full text-center shadow-md flex flex-col items-center relative z-20 justify-center min-h-[120px]">
+                <div class="w-10 h-10 mb-2 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100">
+                  <i data-lucide="${cl.icon}" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-[14px] text-slate-800 leading-tight uppercase tracking-wider">${esc(cl.title)}</h3>
+                <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 px-2">${esc(cl.desc)}</p>
+                <div class="mt-2 inline-flex items-center gap-1 text-[9px] text-slate-400 font-medium">
+                  <i data-lucide="users" class="w-3 h-3"></i> ${cl.members.length} ${cl.members.length === 1 ? 'integrante' : 'integrantes'}
+                </div>
+              </div>
+              <div class="flex flex-col items-center w-full mt-0">
+                ${cl.members.map((m, i) => `
+                  <div class="w-0.5 h-8 bg-slate-300 z-10"></div>
+                  <div class="w-full relative z-20">
+                    ${renderNode(m, i, cl.id, false)}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
         </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        ${cl.members.map((m,mi) => renderCard(m, mi, cl)).join('')}
-      </div>
-    </div>
-  `).join('');
+    </div>`;
+  root.innerHTML = html;
+  lucide.createIcons();
 }
 
-function avatarStyle(m) { return `background:linear-gradient(135deg,${m.avatarFrom},${m.avatarTo})`; }
+function renderNode(m, mi, clusterId, isRoot = false) {
+  const isVerified = m.sources && m.sources.length >= 3;
+  const verifiedIcon = isVerified ? `<i data-lucide="badge-check" class="w-4 h-4 text-emerald-500 ml-1 inline-block shrink-0" title="Información triangulada con ${m.sources.length} fuentes"></i>` : '';
 
-function renderCard(m, mi, cl) {
+  const photoSizeClass = isRoot ? "w-16 h-16 text-xl" : "w-12 h-12 text-sm";
   const photoHtml = m.photo
-    ? `<div class="w-14 h-14 rounded-2xl overflow-hidden shadow-md relative" style="${avatarStyle(m)}"><img src="${esc(m.photo)}" alt="${esc(m.name)}" class="w-full h-full object-cover" onerror="this.style.display='none'"><span class="absolute inset-0 flex items-center justify-center text-white text-xl font-bold pointer-events-none" style="z-index:-1">${esc(m.initials)}</span></div>`
-    : `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl font-bold shadow-md" style="${avatarStyle(m)}">${esc(m.initials)}</div>`;
-  const s2 = m.skills.slice(0,2).map(s=>`<span class="chip bg-slate-50 border border-slate-100 text-slate-500">${esc(s)}</span>`).join('');
-  const more = m.skills.length>2 ? `<span class="chip bg-slate-50 border border-slate-100 text-slate-400">+${m.skills.length-2}</span>` : '';
-  const gradStops = cl.gradient.replace(/from-/g,'').replace(/to-/g,'').split(' ').map(x=>cssColor(x)).join(',');
+    ? `<img src="${esc(m.photo)}" alt="${esc(m.name)}" class="${photoSizeClass} rounded-full object-cover border-2 border-slate-100 shadow-sm mx-auto mb-3" onerror="this.style.display='none'">`
+    : `<div class="${photoSizeClass} rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center border-2 border-slate-200 shadow-sm mx-auto mb-3">${esc(m.initials)}</div>`;
+
+  const cardStyle = isRoot
+    ? "bg-white border-2 border-blue-400 shadow-lg ring-4 ring-blue-50 px-6 py-5"
+    : "bg-white border border-slate-200 shadow hover:shadow-md px-5 py-4";
+
   return `
-    <div class="card bg-white rounded-2xl border border-slate-200 overflow-hidden cursor-pointer hover:border-indigo-200"
-         onclick="openModal('${esc(cl.id)}',${mi})">
-      <div class="h-2 w-full" style="background:linear-gradient(to right,${gradStops})"></div>
-      <div class="p-6 flex flex-col h-full">
-        <div class="flex justify-between items-start mb-4">
-          ${photoHtml}
-          <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-        </div>
-        <h3 class="font-bold text-slate-900 text-base leading-snug mb-1">${esc(m.name)}</h3>
-        <p class="text-xs text-slate-500 font-medium mb-3">${esc(m.profession)}</p>
-        <div class="chip ${cl.bg} ${cl.text} mb-4">${esc(m.role)}</div>
-        <div class="flex gap-1 flex-wrap">${s2}${more}</div>
-      </div>
+    <div class="${cardStyle} rounded-xl org-node cursor-pointer flex flex-col items-center text-center w-full mx-auto" onclick="openModal('${esc(clusterId)}', ${mi})">
+      ${photoHtml}
+      <h3 class="font-bold text-slate-800 ${isRoot ? 'text-[15px]' : 'text-[13px]'} leading-tight flex items-center justify-center mb-1">
+        <span class="truncate max-w-[200px]">${esc(m.name)}</span>${verifiedIcon}
+      </h3>
+      <p class="text-[11px] text-slate-500 font-medium mb-3">${esc(m.profession)}</p>
+      <span class="inline-flex items-center text-[9px] font-bold tracking-wider uppercase px-2 py-1 rounded bg-slate-100 text-slate-600 border border-slate-200">
+        ${esc(m.role)}
+      </span>
     </div>`;
 }
 
-const COLOR_MAP = {
-  'purple-500':'#a855f7','indigo-600':'#4f46e5','emerald-400':'#34d399','teal-600':'#0d9488',
-  'blue-500':'#3b82f6','indigo-500':'#6366f1','orange-400':'#fb923c','rose-500':'#f43f5e',
-  'slate-500':'#64748b','gray-700':'#374151'
-};
-function cssColor(cls) { return COLOR_MAP[cls.trim()] || '#64748b'; }
-
 function openModal(clusterId, mi) {
-  const cl = CLUSTERS.find(c=>c.id===clusterId);
+  const cl = CLUSTERS.find(c => c.id === clusterId);
   currentMember = cl.members[mi];
   currentTab = 'perfil';
-  renderModal(cl);
+  renderModalSidebar();
+  renderModalTabs();
+  renderTabContent();
   const ov = document.getElementById('modal-overlay');
-  ov.classList.remove('opacity-0','pointer-events-none');
+  ov.classList.remove('hidden');
+  ov.classList.add('flex');
   document.body.style.overflow = 'hidden';
+  lucide.createIcons();
 }
 
 function closeModal() {
   const ov = document.getElementById('modal-overlay');
-  ov.classList.add('opacity-0','pointer-events-none');
+  ov.classList.add('hidden');
+  ov.classList.remove('flex');
   document.body.style.overflow = '';
 }
 
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
-function renderModal(cl) {
+function renderModalSidebar() {
   const m = currentMember;
+  const isVerified = m.sources && m.sources.length >= 3;
+
   const photoHtml = m.photo
-    ? `<div class="w-24 h-24 rounded-3xl overflow-hidden shadow-xl mb-6 border-2 border-white/20 bg-white/10"><img src="${esc(m.photo)}" alt="${esc(m.name)}" class="w-full h-full object-cover" onerror="this.outerHTML='<div class=\\'w-full h-full flex items-center justify-center text-white text-4xl font-bold\\'>${esc(m.initials)}</div>'"></div>`
-    : `<div class="w-24 h-24 rounded-3xl bg-white/10 border border-white/20 flex items-center justify-center text-white text-4xl font-bold shadow-xl mb-6">${esc(m.initials)}</div>`;
+    ? `<img src="${esc(m.photo)}" alt="${esc(m.name)}" class="w-24 h-24 rounded-lg object-cover border border-slate-200 shadow-sm mb-4" onerror="this.outerHTML='<div class=\\'w-24 h-24 rounded-lg bg-slate-200 text-slate-400 flex items-center justify-center text-2xl font-bold mb-4\\'>${esc(m.initials)}</div>'">`
+    : `<div class="w-24 h-24 rounded-lg bg-slate-200 text-slate-400 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm border border-slate-300">${esc(m.initials)}</div>`;
 
-  const social = [];
-  if(m.linkedin) social.push(`<a href="${esc(m.linkedin)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="LinkedIn">${svgLinkedin()}</a>`);
-  if(m.scholar)  social.push(`<a href="${esc(m.scholar)}"  target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="Google Scholar">${svgScholar()}</a>`);
-  if(m.orcid)    social.push(`<a href="https://orcid.org/${esc(m.orcid)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="ORCID">${svgOrcid()}</a>`);
-  if(m.researchgate) social.push(`<a href="${esc(m.researchgate)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="ResearchGate">${svgRG()}</a>`);
-  if(m.twitter)  social.push(`<a href="${esc(m.twitter)}" target="_blank" rel="noreferrer" class="social-btn p-2 bg-white/10 hover:bg-white/25 rounded-lg" title="Twitter/X">${svgX()}</a>`);
+  const socialLinks = [];
+  if(m.linkedin) socialLinks.push(`<a href="${esc(m.linkedin)}" target="_blank" rel="noreferrer" class="text-slate-400 hover:text-blue-600 transition-colors" title="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>`);
+  if(m.scholar) socialLinks.push(`<a href="${esc(m.scholar)}" target="_blank" rel="noreferrer" class="text-slate-400 hover:text-blue-500 transition-colors" title="Google Scholar"><i data-lucide="graduation-cap" class="w-5 h-5"></i></a>`);
+  if(m.orcid) socialLinks.push(`<a href="https://orcid.org/${esc(m.orcid)}" target="_blank" rel="noreferrer" class="text-slate-400 hover:text-green-600 transition-colors" title="ORCID"><i data-lucide="fingerprint" class="w-5 h-5"></i></a>`);
+  if(m.researchgate) socialLinks.push(`<a href="${esc(m.researchgate)}" target="_blank" rel="noreferrer" class="text-slate-400 hover:text-teal-600 transition-colors" title="ResearchGate"><i data-lucide="network" class="w-5 h-5"></i></a>`);
+  if(m.twitter) socialLinks.push(`<a href="${esc(m.twitter)}" target="_blank" rel="noreferrer" class="text-slate-400 hover:text-slate-900 transition-colors" title="X / Twitter"><i data-lucide="twitter" class="w-5 h-5"></i></a>`);
 
-  const orcidLine = m.orcid ? `<div class="text-xs mt-2 text-white/60 font-mono">ORCID: ${esc(m.orcid)}</div>` : '';
-
-  document.getElementById('modal-left').style.background = `linear-gradient(135deg,${m.avatarFrom},${m.avatarTo})`;
-  document.getElementById('modal-left').innerHTML = `
-    <button onclick="closeModal()" class="md:hidden absolute top-4 right-4 bg-white/20 p-1.5 rounded-full text-white hover:bg-white/30">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
+  document.getElementById('modal-sidebar-content').innerHTML = `
     ${photoHtml}
-    <h2 class="text-xl font-bold leading-tight mb-1 text-white">${esc(m.fullName)}</h2>
-    <p class="text-white/75 text-sm font-medium mb-4">${esc(m.profession)}</p>
-    <div class="inline-flex px-3 py-1 bg-white/20 rounded-lg text-sm font-semibold mb-4 text-white">${esc(m.role)}</div>
-    <a href="mailto:${esc(m.email)}" class="flex items-center gap-2 text-white/70 text-xs hover:text-white mb-6 transition-colors">
-      <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-      ${esc(m.email)}
-    </a>
-    <div class="flex-grow">
-      <div class="text-xs font-bold uppercase tracking-widest text-white/50 mb-3">Especialidades</div>
-      <div class="flex flex-wrap gap-2">
-        ${m.skills.map(s=>`<span class="text-xs px-3 py-1 bg-black/20 rounded-full font-medium text-white">${esc(s)}</span>`).join('')}
+    <div class="mb-4">
+      <h2 class="text-lg font-bold text-slate-900 leading-tight flex items-center gap-1.5">
+        ${esc(m.fullName)}
+        ${isVerified ? `<i data-lucide="badge-check" class="w-5 h-5 text-emerald-500 shrink-0" title="Perfil con ${m.sources.length} fuentes verificables"></i>` : ''}
+      </h2>
+      <p class="text-sm text-slate-500 mt-1">${esc(m.profession)}</p>
+    </div>
+
+    <div class="inline-block self-start px-2.5 py-1 mb-6 rounded text-[10px] font-bold tracking-wider uppercase bg-blue-100 text-blue-800 border border-blue-200">
+      ${esc(m.role)}
+    </div>
+
+    <div class="space-y-4 mb-6 text-sm flex-grow">
+      <div>
+        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Contacto Institucional</div>
+        <a href="mailto:${esc(m.email)}" class="text-blue-600 hover:underline flex items-center gap-2 break-all">
+          <i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i> ${esc(m.email)}
+        </a>
+      </div>
+      ${m.orcid ? `
+      <div>
+        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Identificador ORCID</div>
+        <a href="https://orcid.org/${esc(m.orcid)}" target="_blank" rel="noreferrer" class="font-mono text-slate-600 text-xs hover:text-green-700 underline-offset-2 hover:underline">${esc(m.orcid)}</a>
+      </div>` : ''}
+      <div>
+        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Dominio Técnico</div>
+        <div class="flex flex-wrap gap-1.5">
+          ${m.skills.map(s => `<span class="px-2 py-1 bg-white border border-slate-200 text-slate-600 rounded text-[10px] font-medium shadow-sm">${esc(s)}</span>`).join('')}
+        </div>
       </div>
     </div>
-    ${social.length ? `<div class="flex gap-2 mt-6 pt-5 border-t border-white/20 flex-wrap">${social.join('')}</div>` : `<div class="mt-6 pt-5 border-t border-white/20 text-xs text-white/50">Sin perfiles públicos verificables.</div>`}
-    ${orcidLine}
-  `;
 
-  document.getElementById('modal-tabs').innerHTML = `
-    <button class="tab-btn pb-4 text-sm font-bold border-b-2 ${currentTab==='perfil'?'border-indigo-600 text-indigo-600':'border-transparent text-slate-500 hover:text-slate-800'}" onclick="switchTab('perfil')">Perfil Académico</button>
-    <button class="tab-btn pb-4 text-sm font-bold border-b-2 flex items-center gap-1.5 ${currentTab==='episig'?'border-indigo-600 text-indigo-600':'border-transparent text-slate-500 hover:text-slate-800'}" onclick="switchTab('episig')">⚡ Sinergia EpiSIG</button>
-    <button class="tab-btn pb-4 text-sm font-bold border-b-2 flex items-center gap-1.5 ${currentTab==='fuentes'?'border-indigo-600 text-indigo-600':'border-transparent text-slate-500 hover:text-slate-800'}" onclick="switchTab('fuentes')">🔗 Fuentes <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">${m.sources?m.sources.length:0}</span></button>
-    <button onclick="closeModal()" class="hidden md:block ml-auto text-slate-300 hover:text-slate-600 self-start mt-1">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
+    <div class="mt-auto pt-4 border-t border-slate-200 flex gap-4 items-center flex-wrap">
+      ${socialLinks.length ? socialLinks.join('') : '<span class="text-xs text-slate-400 italic">Sin identificadores externos detectados.</span>'}
+    </div>
   `;
-  renderTabContent();
 }
 
-function switchTab(tab) {
-  currentTab = tab;
-  const tabs = document.getElementById('modal-tabs').querySelectorAll('.tab-btn');
-  tabs.forEach(btn => {
-    const isActive = btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${tab}'`);
-    if(isActive) {
-      btn.classList.remove('border-transparent','text-slate-500');
-      btn.classList.add('border-indigo-600','text-indigo-600');
-    } else if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('switchTab')) {
-      btn.classList.add('border-transparent','text-slate-500');
-      btn.classList.remove('border-indigo-600','text-indigo-600');
-    }
-  });
+function renderModalTabs() {
+  const tabs = [
+    { id: 'perfil', label: 'Resumen Ejecutivo', icon: 'file-text' },
+    { id: 'episig', label: 'Vectores de Colaboración', icon: 'git-merge' },
+    { id: 'fuentes', label: 'Trazabilidad', icon: 'shield-check', badge: currentMember.sources?.length || 0 }
+  ];
+
+  document.getElementById('modal-tabs').innerHTML = tabs.map(t => `
+    <button onclick="switchTab('${t.id}')" class="pb-3 border-b-2 text-sm font-medium flex items-center gap-2 transition-colors
+      ${currentTab === t.id ? 'border-blue-600 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}">
+      <i data-lucide="${t.icon}" class="w-4 h-4"></i>
+      ${t.label}
+      ${t.badge !== undefined ? `<span class="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold ${currentTab === t.id ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-500'}">${t.badge}</span>` : ''}
+    </button>
+  `).join('');
+}
+
+function switchTab(tabId) {
+  currentTab = tabId;
+  renderModalTabs();
   renderTabContent();
+  lucide.createIcons();
 }
 
 function renderTabContent() {
   const m = currentMember;
   const el = document.getElementById('modal-content');
 
-  if(currentTab === 'perfil') {
-    const photoNoteHtml = m.photoNote
-      ? `<div class="mb-6 p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800"><strong>Foto:</strong> ${esc(m.photoNote)}</div>`
-      : '';
-    const pubsHtml = m.publications && m.publications.length > 0
-      ? `<section>
-          <h3 class="flex items-center gap-2 text-base font-bold text-slate-800 mb-4">📄 Publicaciones Destacadas</h3>
-          <ul class="space-y-3">${m.publications.map(p=>`<li class="flex gap-3"><div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"></div><span class="text-sm text-slate-600">${esc(p)}</span></li>`).join('')}</ul>
-        </section>`
-      : `<div class="p-4 rounded-xl bg-slate-50 text-sm text-slate-500 border border-slate-100">Sin publicaciones indexadas detectadas (perfil técnico-administrativo o ingreso reciente).</div>`;
-    const projHtml = m.projects && m.projects.length > 0
-      ? `<section>
-          <h3 class="flex items-center gap-2 text-base font-bold text-slate-800 mb-4">💼 Proyectos y Roles Destacados</h3>
-          <ul class="space-y-3">${m.projects.map(p=>`<li class="flex gap-3"><div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div><span class="text-sm text-slate-600 font-medium">${esc(p)}</span></li>`).join('')}</ul>
-        </section>`
-      : '';
-    el.innerHTML = `<div class="space-y-8 anim">
-      ${photoNoteHtml}
+  if (currentTab === 'perfil') {
+    const listCls = "space-y-2 mt-2 text-sm text-slate-600";
+    const liCls = "flex gap-2 items-start";
+    const iconCls = "w-4 h-4 text-blue-500 shrink-0 mt-0.5";
+
+    let html = `<div class="anim-fade space-y-8">`;
+
+    if (m.photoNote) {
+      html += `<div class="bg-amber-50 border-l-2 border-amber-400 p-3 text-xs text-amber-800 rounded-r flex items-start gap-2">
+        <i data-lucide="info" class="w-4 h-4 shrink-0 mt-0.5"></i>
+        <span><strong>Foto:</strong> ${esc(m.photoNote)}</span>
+      </div>`;
+    }
+
+    html += `
       <section>
-        <h3 class="flex items-center gap-2 text-base font-bold text-slate-800 mb-3">🏆 Trayectoria Profesional</h3>
-        <p class="text-slate-600 leading-relaxed text-sm">${esc(m.trajectory)}</p>
-      </section>
-      ${projHtml}
-      ${pubsHtml}
-    </div>`;
-  } else if(currentTab === 'episig') {
-    el.innerHTML = `<div class="anim h-full flex flex-col">
-      <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-8 border border-indigo-100 flex-grow">
-        <h3 class="text-lg font-bold text-indigo-900 mb-4 flex items-center gap-3">⚡ Propuesta de Colaboración</h3>
-        <p class="text-indigo-800 leading-relaxed text-sm">${esc(m.collab)}</p>
-        <div class="mt-8 pt-6 border-t border-indigo-200/50">
-          <p class="text-xs text-indigo-600 font-semibold mb-3 uppercase tracking-wide">Acción sugerida para la reunión:</p>
-          <div class="bg-white/60 p-4 rounded-xl text-sm text-slate-700 flex items-start gap-3 shadow-sm">
-            <span class="text-indigo-500 shrink-0">→</span>
-            <span>Presentar casos de éxito de EpiSIG relacionados con <strong class="text-indigo-900">${esc(m.skills[0])}</strong>${m.skills[1]?' y <strong class="text-indigo-900">'+esc(m.skills[1])+'</strong>':''}.</span>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 border-b border-slate-100 pb-2 mb-3">Trayectoria y Rol</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">${esc(m.trajectory)}</p>
+      </section>`;
+
+    if (m.projects && m.projects.length) {
+      html += `
+      <section>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 border-b border-slate-100 pb-2 mb-3">Proyectos Activos / Históricos</h3>
+        <ul class="${listCls}">
+          ${m.projects.map(p => `<li class="${liCls}"><i data-lucide="chevron-right" class="${iconCls}"></i> <span>${esc(p)}</span></li>`).join('')}
+        </ul>
+      </section>`;
+    }
+
+    if (m.publications && m.publications.length) {
+      html += `
+      <section>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 border-b border-slate-100 pb-2 mb-3">Producción Científica Relevante <span class="text-xs font-medium text-slate-400 normal-case">(${m.publications.length})</span></h3>
+        <ul class="${listCls}">
+          ${m.publications.map(p => `<li class="${liCls}"><i data-lucide="book-open" class="${iconCls} text-slate-400"></i> <span>${esc(p)}</span></li>`).join('')}
+        </ul>
+      </section>`;
+    } else {
+      html += `<div class="bg-slate-50 border border-slate-200 rounded p-3 text-xs text-slate-500 flex items-start gap-2">
+        <i data-lucide="info" class="w-4 h-4 shrink-0 mt-0.5"></i>
+        <span>Sin publicaciones científicas indexadas detectadas — perfil técnico-administrativo o ingreso reciente.</span>
+      </div>`;
+    }
+
+    html += `</div>`;
+    el.innerHTML = html;
+
+  } else if (currentTab === 'episig') {
+    el.innerHTML = `
+      <div class="anim-fade h-full">
+        <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-6 h-full flex flex-col">
+          <div class="flex items-center gap-2 mb-4 text-blue-800">
+            <i data-lucide="lightbulb" class="w-5 h-5"></i>
+            <h3 class="font-bold">Hipótesis de Sinergia</h3>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-6">${esc(m.collab)}</p>
+          <div class="mt-auto pt-4 border-t border-blue-200/60">
+            <h4 class="text-[10px] font-bold uppercase tracking-wider text-blue-600 mb-2">Línea de diálogo sugerida para la reunión</h4>
+            <div class="bg-white border border-blue-100 rounded p-3 text-sm text-slate-600 flex items-start gap-2 shadow-sm">
+              <i data-lucide="message-square" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+              <span>Presentar casos de éxito de EpiSIG relacionados con <strong class="text-blue-900">${esc(m.skills[0])}</strong>${m.skills[1]?' y <strong class="text-blue-900">'+esc(m.skills[1])+'</strong>':''}.</span>
+            </div>
           </div>
         </div>
-      </div>
-    </div>`;
-  } else if(currentTab === 'fuentes') {
-    const sources = m.sources || [];
-    el.innerHTML = `<div class="anim space-y-4">
-      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-sm text-emerald-900 mb-2">
-        <strong>🛡 Trazabilidad:</strong> Toda la información de este perfil se basa en las ${sources.length} fuentes públicas listadas abajo. Haz clic en cada enlace para verificar directamente.
-      </div>
-      <ul class="space-y-1">
-        ${sources.map((s,i)=>`
-          <li>
-            <a href="${esc(s.url)}" target="_blank" rel="noreferrer" class="src-link text-sm text-slate-700 hover:text-indigo-700 group">
-              <span class="text-xs font-mono text-slate-400 mt-0.5 shrink-0">${String(i+1).padStart(2,'0')}.</span>
-              <div class="flex-1 min-w-0">
-                <div class="font-medium">${esc(s.label)}</div>
-                <div class="text-xs text-slate-400 group-hover:text-indigo-500 truncate">${esc(s.url)}</div>
-              </div>
-              <svg class="w-4 h-4 text-slate-300 group-hover:text-indigo-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-          </li>`).join('')}
-      </ul>
-      ${sources.length === 0 ? '<div class="p-4 text-sm text-slate-500">Sin fuentes adicionales disponibles.</div>' : ''}
-    </div>`;
-  }
-}
+      </div>`;
 
-function svgLinkedin() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`; }
-function svgScholar() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5z"/></svg>`; }
-function svgOrcid() { return `<svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.731-1.566 3.731-3.722 0-2.072-1.241-3.722-3.731-3.722h-2.297z"/></svg>`; }
-function svgRG() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.586 0H4.414A4.414 4.414 0 000 4.414v15.172A4.414 4.414 0 004.414 24h15.172A4.414 4.414 0 0024 19.586V4.414A4.414 4.414 0 0019.586 0zM9.3 16.8H6.9V7.2h2.4v9.6zm-1.2-10.8a1.35 1.35 0 110-2.7 1.35 1.35 0 010 2.7zm10.5 10.8h-2.4v-4.8c0-.9-.75-1.5-1.5-1.5s-1.5.6-1.5 1.5v4.8h-2.4V7.2h2.4v1.2c.6-.9 1.65-1.5 2.7-1.5 1.95 0 3.15 1.35 3.15 3.3v6.6z"/></svg>`; }
-function svgX() { return `<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`; }
+  } else if (currentTab === 'fuentes') {
+    const sources = m.sources || [];
+    if (sources.length === 0) {
+      el.innerHTML = `<div class="anim-fade text-sm text-slate-500 p-4 border border-slate-200 border-dashed rounded text-center">No se han referenciado fuentes externas públicas para este perfil.</div>`;
+      return;
+    }
+    el.innerHTML = `
+      <div class="anim-fade space-y-4">
+        <div class="bg-emerald-50 border border-emerald-200 rounded p-4 flex items-start gap-3">
+          <i data-lucide="shield-check" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+          <p class="text-xs text-emerald-900 leading-relaxed">
+            <strong>Trazabilidad:</strong> toda la información de este perfil se basa exclusivamente en las ${sources.length} fuentes públicas listadas. Haz clic para verificar directamente.
+          </p>
+        </div>
+        <div class="space-y-2">
+          ${sources.map((s, i) => `
+            <a href="${esc(s.url)}" target="_blank" rel="noreferrer" class="group flex items-center justify-between p-3 rounded border border-slate-100 hover:border-blue-200 hover:bg-blue-50 transition-colors">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-6 text-center text-xs font-mono text-slate-400 shrink-0">${String(i+1).padStart(2,'0')}</div>
+                <div class="min-w-0">
+                  <div class="text-sm font-medium text-slate-700 group-hover:text-blue-700 truncate">${esc(s.label)}</div>
+                  <div class="text-xs text-slate-400 truncate mt-0.5 group-hover:text-blue-500">${esc(s.url)}</div>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-4 h-4 text-slate-300 group-hover:text-blue-500 shrink-0 ml-4"></i>
+            </a>
+          `).join('')}
+        </div>
+      </div>`;
+  }
+  lucide.createIcons();
+}
 
 renderApp();
 </script>
